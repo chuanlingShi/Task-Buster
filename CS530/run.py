@@ -37,10 +37,8 @@ def save_card():
     data = request.get_json()
     title = data['title']
     description = data['description']
-    user_id = data['user_id']
+    user_id = current_user.id
     status = data['status']
-
-
 
     card = Card(title=title, description=description, user_id=user_id, status=status)
     db.session.add(card)
