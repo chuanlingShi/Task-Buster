@@ -78,6 +78,12 @@ class SignupForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
 
+class Note(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
@@ -88,9 +94,35 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/note')
+@app.route('/note', methods=['POST', 'GET'])
 def note():
-    return render_template('note.html')
+    if not current_user.is_authenticated:
+        flash('Please log in to access this page.', 'warning')
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        note_content = request.form['inputField']
+        note = Note(content=note_content, user_id=current_user.id)
+        try:
+            db.session.add(note)
+            db.session.commit()
+            return redirect(url_for('note'))
+        except:
+            return 'There was a problem adding that note.'
+    else:
+        notes = Note.query.all()
+    return render_template('note.html', notes=notes)
+
+
+@app.route('/delete_note/<int:id>')
+def delete(id):
+    note_to_delete = Note.query.get_or_404(id)
+
+    try:
+        db.session.delete(note_to_delete)
+        db.session.commit()
+        return redirect(url_for('note'))
+    except:
+        return 'There was a problem deleting that note'
 
 
 @app.route('/project')
@@ -162,6 +194,9 @@ def logout():
     response.set_cookie('username', '', expires=0)
     return response
 
+
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
