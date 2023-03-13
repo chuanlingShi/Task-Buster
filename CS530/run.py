@@ -39,12 +39,22 @@ def save_card():
     description = data['description']
     user_id = current_user.id
     status = data['status']
+    task_id = data['id']
 
-    card = Card(title=title, description=description, user_id=user_id, status=status)
-    db.session.add(card)
-    db.session.commit()
+    card = Card.query.filter_by(id=task_id).first()
+    if card:
+        card.title = title
+        card.description = description
+        card.status = status
+        db.session.commit()
+        message = 'Card updated successfully!'
+    else:
+        card = Card(title=title, description=description, user_id=user_id, status=status, id=task_id)
+        db.session.add(card)
+        db.session.commit()
+        message = 'Card created successfully!'
 
-    return jsonify({'message': 'Card created successfully!'})
+    return jsonify({'message': message})
 
 
 class Users(UserMixin, db.Model):
