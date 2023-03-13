@@ -2,8 +2,8 @@
 {% set active = "Note" %}
 
 {% block header %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="/static/js/noteViewer.js"></script>
+    {{ super() }}
+    <script src="/static/js/noteViewer.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -11,14 +11,29 @@ Note
 {% endblock %}
 
 {% block content %}
-
-<div class="input-group my-5 shadow mx-auto rounded" style="width: 50%;">
-    <input type="text" class="form-control" id="inputField" placeholder="Take a note...">
-    <button id="add-note-btn" class="btn btn-primary"><i class="fa-solid fa-check"></i></button>
-</div>
+<form action="/note" method="POST">
+    <div class="input-group my-5 shadow mx-auto rounded" style="width: 50%;">
+        <input type="text" class="form-control" name="inputField" id="inputField" placeholder="Take a note...">
+        <button id="add-note-btn" class="btn btn-primary"><i class="fa-solid fa-check"></i></button>
+    </div>
+</form>
 
 <div class="row card-container">
+    {% for note in notes %}
+    <div class="col-sm-4 mb-2">
+        <div class="card position-relative">
+            <div class="card-body">
+                <button type="button"
+                    class="btn btn-outline-danger position-absolute top-0 end-0 delete-card-btn d-none rounded-circle"><i
+                        onclick="window.location.href='/delete_note/{{note.id}}'" class="fas fa-trash"></i>
+                </button>
+                <p class="card-text">
+                    {{note.content}}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
-
 
 {% endblock %}
