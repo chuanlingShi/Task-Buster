@@ -1,41 +1,83 @@
 {% extends 'base.html' %}
-{% set active = "Project" %}
+{% set active = "project" %}
 
 {% block title %}
 Project
 {% endblock %}
 
 {% block content %}
-  <h1>My To-Do List</h1>
-  <form method="post" action="{{ url_for('add_task') }}">
-    {{ form.csrf_token }}
-    <div class="form-group">
-      <label for="task_name">Task Name:</label>
-      <input type="text" class="form-control" id="task_name" name="task_name" required>
-    </div>
-    <div class="d-flex justify-content-center">
-      <button type="submit" class="btn btn-primary mx-2">Add Task</button>
-    </div>
-  </form>
+    <main>
+        <section class="container">
+            <div class="list-column">
+                <div class="list">
+                    <div class="list-header">
+                        <h2 class="list-title">To Do</h2>
+                        <button class="add-card">+ Add a card</button>
+                    </div>
+                    <div class="list-body">
+                    </div>
+                    <div class="list-footer">
+                        <button class="delete-list">Delete List</button>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="list-header">
+                        <h2 class="list-title">In Progress</h2>
+                        <button class="add-card">+ Add a card</button>
+                    </div>
+                    <div class="list-body">
+                    </div>
+                    <div class="list-footer">
+                        <button class="delete-list">Delete List</button>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="list-header">
+                        <h2 class="list-title">Done</h2>
+                        <button class="add-card">+ Add a card</button>
+                    </div>
+                    <div class="list-body">
+                    </div>
+                    <div class="list-footer">
+                        <button class="delete-list">Delete List</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-  {% if tasks %}
-    <ul class="list-group mt-4">
-      {% for task in tasks %}
-        <li class="list-group-item {% if task.completed %}completed{% endif %}">
-          <div class="d-flex justify-content-between">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="completed" name="completed" {% if task.completed %}checked{% endif %} onchange="event.target.form.submit()">
-              <label class="form-check-label" for="completed">{{ task.name }}</label>
-            </div>
-            <div>
-              <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-secondary mx-2">Edit</a>
-              <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger mx-2">Delete</a>
-            </div>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p class="mt-4">No tasks yet!</p>
-  {% endif %}
+<script>
+    const addCardButtons = document.querySelectorAll('.add-card');
+
+    addCardButtons.forEach(function(addCardButton) {
+    addCardButton.addEventListener('click', function() {
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    const title = document.createElement('input');
+    title.type = 'text';
+    title.contenteditable = true;
+    card.appendChild(title);
+
+    const description = document.createElement('textarea');
+    description.contenteditable = false;
+    card.appendChild(description);
+
+    title.value = '';
+    description.value = '';
+
+    description.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = this.scrollHeight + 'px';
+    });
+
+    const listBody = addCardButton.parentNode.nextElementSibling;
+    listBody.appendChild(card);
+  });
+});
+
+</script>
+
+
+
 {% endblock %}

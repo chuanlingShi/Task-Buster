@@ -72,13 +72,13 @@ def login():
         if user and user.password == password:
 
             login_user(user)
-            flash('You have been logged in!', 'success')
+            print('You have been logged in!', 'success')
             return redirect(url_for('home'))
         else:
 
-            flash('Login failed. Please check your username and password.', 'danger')
+            print('Login failed. Please check your username and password.', 'danger')
     else:
-        flash(form.errors)
+        print(form.errors)
     return render_template('login.html', form=form)
 
 
@@ -95,17 +95,17 @@ def signup():
 
         user = Users.query.filter((Users.username == username) | (Users.email == email)).first()
         if user:
-            flash('Username or email has already been registered.', 'danger')
+            print('Username or email has already been registered.', 'danger')
             return redirect(url_for('signup'))
 
         user = Users(username=username, email=email, password=password)
         db.session.add(user)
         db.session.commit()
 
-        flash('Your account has been created successfully. Please log in.', 'success')
+        print('Your account has been created successfully. Please log in.', 'success')
         return redirect(url_for('login'))
     else:
-        flash(form.errors)
+        print(form.errors)
     return render_template('signup.html', form=form)
 
 

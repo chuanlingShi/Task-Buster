@@ -1,0 +1,21 @@
+        .nav-item a:hover{
+            background: #666
+        }
+        .bell-icon {
+            color: white;
+
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        .btn-primary:active, .btn-primary:focus {
+            background-color: #0062cc;
+            border-color: #005cbf;
+        }
+
