@@ -1,14 +1,17 @@
-from flask import Flask, render_template, request, url_for, redirect, flash, session
+from flask import Flask, render_template, request, url_for, redirect, flash, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, current_user, UserMixin, logout_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from flask_wtf.csrf import CSRFProtect
+from flask import make_response
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-goes-here'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_BINDS'] = {'todo': 'sqlite:///todo.db'}
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -17,6 +20,31 @@ login_manager.login_message_category = 'warning'
 
 csrf = CSRFProtect(app)
 app.config['WTF_CSRF_CHECK_DEFAULT'] = False
+
+
+class Card(db.Model):
+    __bind_key__ = 'todo'
+    __tablename__ = 'todos'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String(20), nullable=False)
+
+
+@app.route('/save-card', methods=['POST'])
+def save_card():
+    data = request.get_json()
+    title = data['title']
+    description = data['description']
+    user_id = current_user.id
+    status = data['status']
+
+    card = Card(title=title, description=description, user_id=user_id, status=status)
+    db.session.add(card)
+    db.session.commit()
+
+    return jsonify({'message': 'Card created successfully!'})
 
 
 class Users(UserMixin, db.Model):
@@ -115,9 +143,6 @@ def dashboard():
         flash('Please log in to access this page.', 'warning')
         return redirect(url_for('login'))
     return render_template('home.html')
-
-
-from flask import make_response
 
 
 @app.route('/logout')
