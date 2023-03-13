@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% set active = "project" %}
 
-
+{% block title %}
+Project
+{% endblock %}
 
 {% block content %}
     <main>
@@ -9,11 +11,21 @@
             <div class="list-column">
                 <div class="list">
                     <div class="list-header">
-                        <h2 class="list-title">To Do</h2>
-                        <button class="add-card">+ Add a card</button>
+                        <h2 class="list-title">To Do</h2>    
+                            <div class="input-container">
+                                <input type="text" placeholder="Enter a task" id="task-input">
+                                <button class="add-card" onclick="addTask()">+ Add a Tast</button>
+                            </div>
+                        
                     </div>
                     <div class="list-body">
+                        <ul id="todo-list" class="list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+                            
+                        </ul>
+                              
                     </div>
+                
+                    
                     <div class="list-footer">
                         <button class="delete-list">Delete List</button>
                     </div>
@@ -21,9 +33,11 @@
                 <div class="list">
                     <div class="list-header">
                         <h2 class="list-title">In Progress</h2>
-                        <button class="add-card">+ Add a card</button>
+                        <!-- <button class="add-card">+ Add a card</button> -->
                     </div>
                     <div class="list-body">
+                        <ul id="inprogress-list" class="list" ondrop="drop(event, 'inprogress')" ondragover="allowDrop(event)">
+                        </ul>
                     </div>
                     <div class="list-footer">
                         <button class="delete-list">Delete List</button>
@@ -32,9 +46,11 @@
                 <div class="list">
                     <div class="list-header">
                         <h2 class="list-title">Done</h2>
-                        <button class="add-card">+ Add a card</button>
+                        <!-- <button class="add-card">+ Add a card</button> -->
                     </div>
                     <div class="list-body">
+                        <ul id="done-list" class="list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+                        </ul>
                     </div>
                     <div class="list-footer">
                         <button class="delete-list">Delete List</button>
@@ -45,88 +61,78 @@
     </main>
 
 <script>
-    const addCardButtons = document.querySelectorAll('.add-card');
+//     const addCardButtons = document.querySelectorAll('.add-card');
 
-addCardButtons.forEach(function(addCardButton) {
-  addCardButton.addEventListener('click', function() {
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.setAttribute('data-id', Math.random().toString(36).substring(2, 15)); // generate a random id
+//     addCardButtons.forEach(function(addCardButton) {
+//         addCardButton.addEventListener('click', function() {
+//             const card = document.createElement('div');
+//             card.classList.add('card');
 
-    const title = document.createElement('input');
-    title.type = 'text';
-    title.contenteditable = true;
-    card.appendChild(title);
+//             const title = document.createElement('input');
+//             title.type = 'text';
+//             title.contenteditable = true;
+//             card.appendChild(title);
 
-    const description = document.createElement('textarea');
-    description.contenteditable = true;
-    description.setAttribute('name', 'description');
-    card.appendChild(description);
+//             const description = document.createElement('textarea');
+//             description.contenteditable = false;
+//             card.appendChild(description);
 
-    title.value = '';
-    description.value = '';
+//             title.value = '';
+//             description.value = '';
 
-    const listBody = addCardButton.parentNode.nextElementSibling;
-    listBody.appendChild(card);
+//             description.addEventListener('input', function() {
+//               this.style.height = 'auto';
+//               this.style.height = this.scrollHeight + 'px';
+//             });
 
-    let timeoutId; // define a variable to hold the timeout ID
+//             const listBody = addCardButton.parentNode.nextElementSibling;
+//             listBody.appendChild(card);
 
-    // add event listener to submit the form data to the server when the input fields are blurred
-    title.addEventListener('blur', function() {
-      const formData = {
-        id: card.getAttribute('data-id'), // add id to form data
-        title: title.value,
-        description: description.value,
-        status: listBody.parentNode.querySelector('.list-title').textContent
-      };
+//       });
+// });
 
-      if (formData.title.trim() === '' && formData.description.trim() === '') {
-        // do nothing if the card title and description are empty
-        return;
-      }
 
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/save-card', true);
-      xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-      xhr.onload = function() {
-        if (this.status === 200) {
-          console.log('Card saved successfully!');
-        }
-      };
-      xhr.send(JSON.stringify(formData));
-    });
 
-    // debounce the description input event
-    description.addEventListener('input', function() {
-      clearTimeout(timeoutId); // clear the previous timeout
-      timeoutId = setTimeout(function() {
-        const formData = {
-          id: card.getAttribute('data-id'), // add id to form data
-          title: title.value,
-          description: description.value,
-          status: listBody.parentNode.querySelector('.list-title').textContent
-        };
-
-        if (formData.title.trim() === '' && formData.description.trim() === '') {
-          // do nothing if the card title and description are empty
-          return;
-        }
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/save-card', true);
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        xhr.onload = function() {
-          if (this.status === 200) {
-            console.log('Card saved successfully!');
+        function allowDrop(event) {
+            event.preventDefault();
           }
-        };
-        xhr.send(JSON.stringify(formData));
-      }, 500); // wait for 500 milliseconds before sending the request
-    });
-  });
-});
 
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+          }
 
+          function drop(event, status) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var element = document.getElementById(data);
+            var parent = element.parentNode;
+            
+            if (status === 'inprogress' && parent.id !== 'inprogress-list') {
+              document.getElementById('inprogress-list').appendChild(element);
+            } else if (status === 'done' && parent.id !== 'done-list') {
+              document.getElementById('done-list').appendChild(element);
+            } else if (status === 'todo' && parent.id !== 'todo-list') {
+              document.getElementById('todo-list').appendChild(element);
+            }
+          }
+
+        function addTask() {
+            var input = document.getElementById('task-input');
+            var task = input.value;
+            if (task !== '') {
+              var element = document.createElement('li');
+              element.draggable = true;
+              element.id = 'item' + (document.querySelectorAll('.list li').length + 1);
+              element.innerHTML = task;
+              element.ondragstart = function(event) {
+                drag(event);
+              }
+              document.getElementById('todo-list').appendChild(element);
+              input.value = '';
+            }
+          }
 </script>
+
+
 
 {% endblock %}
