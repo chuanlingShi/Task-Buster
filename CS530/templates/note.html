@@ -1,10 +1,24 @@
 {% extends 'base.html' %}
 {% set active = "Note" %}
 
+{% block header %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="/static/js/noteViewer.js"></script>
+{% endblock %}
+
 {% block title %}
 Note
 {% endblock %}
 
 {% block content %}
-<h1>Note</h1>
+
+<div class="input-group my-5 shadow mx-auto rounded" style="width: 50%;">
+    <input type="text" class="form-control" id="inputField" placeholder="Take a note...">
+    <button id="add-note-btn" class="btn btn-primary"><i class="fa-solid fa-check"></i></button>
+</div>
+
+<div class="row card-container">
+</div>
+
+
 {% endblock %}
