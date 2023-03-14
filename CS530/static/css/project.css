@@ -5,6 +5,12 @@
           padding: 0;
         }
 
+        main {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+      }
+
         .container {
           display: flex;
           flex-wrap: wrap;
@@ -23,11 +29,12 @@
 
         .list {
           background-color: #fff;
-          border-radius: 3px;
+          border-radius: 4px;
           box-shadow: 0 1px 0 rgba(9,30,66,.25);
           margin-bottom: 20px;
           padding: 10px;
           width: calc(33.33% - 10px);
+          height: 110%;
         }
 
         .list-header {
@@ -43,15 +50,21 @@
           margin: 0;
         }
 
+        .list-body {
+          min-height: 100px;
+          margin-bottom: 8px;
+        }
+
         .add-card {
           background-color: #ebecf0;
-          border-radius: 3px;
+          border-radius: 4px;
           color: #5e6c84;
           cursor: pointer;
           font-size: 14px;
           font-weight: bold;
           margin-left: 10px;
           padding: 6px 8px;
+          text-align: center;
         }
 
         .add-card:hover {
@@ -60,7 +73,7 @@
 
         .card {
           background-color: #ebecf0;
-          border-radius: 3px;
+          border-radius: 4px;
           color: #172b4d;
           cursor: pointer;
           padding: 10px;
@@ -86,12 +99,14 @@
 
         .delete-list {
           background-color: #dfe1e6;
-          border-radius: 3px;
+          border-radius: 4px;
           color: #5e6c84;
           cursor: pointer;
           font-size: 14px;
           font-weight: bold;
           padding: 6px 8px;
+          text-align: center;
+          margin-left: 220px;
         }
 
         .delete-list:hover {
@@ -100,10 +115,37 @@
 
 
         textarea {
-        width: 100%;
-        padding: 5px;
-        box-sizing: border-box;
-        border: none;
-        resize: none;
-        overflow: hidden;
+          width: 100%;
+          padding: 5px;
+          box-sizing: border-box;
+          border: none;
+          resize: none;
+          overflow: hidden;
         }
+
+      input[type="text"] {
+        border: none;
+        font-size: 18px;
+        margin-bottom: 8px;
+        outline: none;
+        width: 100%;
+      }
+
+
+      .drag-over {
+        background-color: rgba(9, 30, 66, 0.2);
+      }
+
+
+      .card.dragover {
+         border-style: dashed;
+      }
+
+
+      .card:hover {
+        cursor: move;
+      }
+
+
+
+

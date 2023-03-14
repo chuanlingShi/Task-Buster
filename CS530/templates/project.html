@@ -10,47 +10,36 @@ Project
         <section class="container">
             <div class="list-column">
                 <div class="list">
-                    <div class="list-header">
-                        <h2 class="list-title">To Do</h2>    
-                            <div class="input-container">
-                                <input type="text" placeholder="Enter a task" id="task-input">
-                                <button class="add-card" onclick="addTask()">+ Add a Tast</button>
-                            </div>
+                    <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(46, 215, 216); padding-left: 15px; padding-right: 15px; border-radius: 4px ">
+                        <h2 class="list-title">To Do</h2>
+                        <button class="add-card">+ Add a card</button>
                         
                     </div>
                     <div class="list-body">
-                        <ul id="todo-list" class="list" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
                             
-                        </ul>
-                              
-                    </div>
-                
+                    </div>                
                     
                     <div class="list-footer">
                         <button class="delete-list">Delete List</button>
                     </div>
                 </div>
                 <div class="list">
-                    <div class="list-header">
+                    <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(0, 170, 255); padding-left: 15px; padding-right: 15px; border-radius: 4px">
                         <h2 class="list-title">In Progress</h2>
-                        <!-- <button class="add-card">+ Add a card</button> -->
+                        <button class="add-card">+ Add a card</button>
                     </div>
                     <div class="list-body">
-                        <ul id="inprogress-list" class="list" ondrop="drop(event, 'inprogress')" ondragover="allowDrop(event)">
-                        </ul>
                     </div>
                     <div class="list-footer">
                         <button class="delete-list">Delete List</button>
                     </div>
                 </div>
                 <div class="list">
-                    <div class="list-header">
+                    <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(161, 121, 242); padding-left: 15px; padding-right: 15px; border-radius: 4px ">
                         <h2 class="list-title">Done</h2>
-                        <!-- <button class="add-card">+ Add a card</button> -->
+                        <button class="add-card">+ Add a card</button>
                     </div>
                     <div class="list-body">
-                        <ul id="done-list" class="list" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
-                        </ul>
                     </div>
                     <div class="list-footer">
                         <button class="delete-list">Delete List</button>
@@ -61,76 +50,128 @@ Project
     </main>
 
 <script>
-//     const addCardButtons = document.querySelectorAll('.add-card');
-
-//     addCardButtons.forEach(function(addCardButton) {
-//         addCardButton.addEventListener('click', function() {
-//             const card = document.createElement('div');
-//             card.classList.add('card');
-
-//             const title = document.createElement('input');
-//             title.type = 'text';
-//             title.contenteditable = true;
-//             card.appendChild(title);
-
-//             const description = document.createElement('textarea');
-//             description.contenteditable = false;
-//             card.appendChild(description);
-
-//             title.value = '';
-//             description.value = '';
-
-//             description.addEventListener('input', function() {
-//               this.style.height = 'auto';
-//               this.style.height = this.scrollHeight + 'px';
-//             });
-
-//             const listBody = addCardButton.parentNode.nextElementSibling;
-//             listBody.appendChild(card);
-
-//       });
-// });
 
 
 
-        function allowDrop(event) {
-            event.preventDefault();
-          }
+    const addCardButtons = document.querySelectorAll('.add-card');
+    const lists = document.querySelectorAll('.list-body');
+    let draggedItem = null;
 
-        function drag(event) {
-            event.dataTransfer.setData("text", event.target.id);
-          }
+    for (let i = 0; i < addCardButtons.length; i++) {
+      const addCardButton = addCardButtons[i];
+      addCardButton.addEventListener('click', function() {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.setAttribute('draggable', true);
 
-          function drop(event, status) {
-            event.preventDefault();
-            var data = event.dataTransfer.getData("text");
-            var element = document.getElementById(data);
-            var parent = element.parentNode;
+        const description = document.createElement('textarea');
+        description.contenteditable = false;
+        card.appendChild(description);
+
+        description.value = '';
+
+        description.addEventListener('textarea', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        const listBody = addCardButton.parentNode.nextElementSibling;
+        listBody.appendChild(card);
+
+        card.addEventListener('dragstart', function() {
+          draggedItem = card;
+          setTimeout(function() {
+            card.style.display = 'none';
+          }, 0);
+        });
+
+        card.addEventListener('dragend', function() {
+          setTimeout(function() {
+            draggedItem.style.display = 'block';
+            draggedItem = null;
+          }, 0);
+        });
+
+        for (let j = 0; j < lists.length; j++) {
+          const list = lists[j];
+
+          list.addEventListener('dragover', function(e) {
+            e.preventDefault();
+          });
+
+          list.addEventListener('dragenter', function(e) {
+            e.preventDefault();
+          });
+
+          list.addEventListener('dragleave', function(e) {
+          });
+
+          list.addEventListener('drop', function(e) {
+            console.log('drop');
+            this.appendChild(draggedItem);
+          });
+        }
+
+        title.addEventListener('blur', function() {
+          card.classList.remove('is-editing');
+        });
+
+        title.addEventListener('focus', function() {
+          card.classList.add('is-editing');
+        });
+
+        // If the card element now has the "is-editing" class, focus on the title element
+        if (card.classList.contains('is-editing')) {
+          title.focus();
+        }
+      });
+    }
+
+
+
+
+    //     function allowDrop(event) {
+    //         event.preventDefault();
+    //       }
+
+    //     function drag(event) {
+    //         event.dataTransfer.setData("text", event.target.id);
+    //       }
+
+    //       function drop(event, status) {
+    //         event.preventDefault();
+    //         var data = event.dataTransfer.getData("text");
+    //         var element = document.getElementById(data);
+    //         var parent = element.parentNode;
             
-            if (status === 'inprogress' && parent.id !== 'inprogress-list') {
-              document.getElementById('inprogress-list').appendChild(element);
-            } else if (status === 'done' && parent.id !== 'done-list') {
-              document.getElementById('done-list').appendChild(element);
-            } else if (status === 'todo' && parent.id !== 'todo-list') {
-              document.getElementById('todo-list').appendChild(element);
-            }
-          }
+    //         if (status === 'inprogress' && parent.id !== 'inprogress-list') {
+    //           document.getElementById('inprogress-list').appendChild(element);
+    //         } else if (status === 'done' && parent.id !== 'done-list') {
+    //           document.getElementById('done-list').appendChild(element);
+    //         } else if (status === 'todo' && parent.id !== 'todo-list') {
+    //           document.getElementById('todo-list').appendChild(element);
+    //         }
+    //       }
 
-        function addTask() {
-            var input = document.getElementById('task-input');
-            var task = input.value;
-            if (task !== '') {
-              var element = document.createElement('li');
-              element.draggable = true;
-              element.id = 'item' + (document.querySelectorAll('.list li').length + 1);
-              element.innerHTML = task;
-              element.ondragstart = function(event) {
-                drag(event);
-              }
-              document.getElementById('todo-list').appendChild(element);
-              input.value = '';
-            }
-          }
+    //     function addTask() {
+    //         var input = document.getElementById('task-input');
+    //         var task = input.value;
+    //         if (task !== '') {
+    //           var element = document.createElement('li');
+    //           element.draggable = true;
+    //           element.id = 'item' + (document.querySelectorAll('.list li').length + 1);
+    //           element.innerHTML = task;
+    //           element.ondragstart = function(event) {
+    //             drag(event);
+    //           }
+    //           document.getElementById('todo-list').appendChild(element);
+    //           input.value = '';
+    //         }
+    //       }
+
+
+
+
 </script>
 
 
