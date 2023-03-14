@@ -57,6 +57,25 @@ def save_card():
     return jsonify({'message': message})
 
 
+@app.route('/get-tasks')
+def get_tasks():
+    user_id = current_user.id
+    todo_list = Card.query.filter_by(user_id=user_id).all()
+    tasks = {}
+    for card in todo_list:
+        task = {
+            'id': card.id,
+            'title': card.title,
+            'description': card.description,
+            'status': card.status
+        }
+        if card.status in tasks:
+            tasks[card.status].append(task)
+        else:
+            tasks[card.status] = [task]
+    return jsonify(tasks)
+
+
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False)
@@ -142,13 +161,13 @@ def login():
         if user and user.password == password:
 
             login_user(user)
-            print('You have been logged in!', 'success')
+            flash('You have been logged in!', 'success')
             return redirect(url_for('home'))
         else:
 
-            print('Login failed. Please check your username and password.', 'danger')
+            flash('Login failed. Please check your username and password.', 'danger')
     else:
-        print(form.errors)
+        flash(form.errors)
     return render_template('login.html', form=form)
 
 
@@ -165,17 +184,17 @@ def signup():
 
         user = Users.query.filter((Users.username == username) | (Users.email == email)).first()
         if user:
-            print('Username or email has already been registered.', 'danger')
+            flash('Username or email has already been registered.', 'danger')
             return redirect(url_for('signup'))
 
         user = Users(username=username, email=email, password=password)
         db.session.add(user)
         db.session.commit()
 
-        print('Your account has been created successfully. Please log in.', 'success')
+        flash('Your account has been created successfully. Please log in.', 'success')
         return redirect(url_for('login'))
     else:
-        print(form.errors)
+        flash(form.errors)
     return render_template('signup.html', form=form)
 
 
