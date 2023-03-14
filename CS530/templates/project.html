@@ -47,122 +47,127 @@ Project
     </main>
 
 <script>
+
+
+
     const addCardButtons = document.querySelectorAll('.add-card');
-    window.addEventListener('DOMContentLoaded', function() {
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', '/get-tasks');
-      xhr.onload = function() {
-        if (this.status === 200) {
-          const tasks = JSON.parse(this.responseText);
-          const listBodies = document.querySelectorAll('.list-body');
-          for (let i = 0; i < listBodies.length; i++) {
-            const listBody = listBodies[i];
-            const status = listBody.parentNode.querySelector('.list-title').textContent;
-            if (status in tasks) {
-              for (let j = 0; j < tasks[status].length; j++) {
-                const task = tasks[status][j];
-                const card = document.createElement('div');
-                card.classList.add('card');
-                card.setAttribute('data-id', task.id);
+    const lists = document.querySelectorAll('.list-body');
+    let draggedItem = null;
 
-                const title = document.createElement('input');
-                title.type = 'text';
-                title.contenteditable = true;
-                title.value = task.title;
-                card.appendChild(title);
+    for (let i = 0; i < addCardButtons.length; i++) {
+      const addCardButton = addCardButtons[i];
+      addCardButton.addEventListener('click', function() {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.setAttribute('draggable', true);
 
-                const description = document.createElement('textarea');
-                description.contenteditable = true;
-                description.setAttribute('name', 'description');
-                description.value = task.description;
-                card.appendChild(description);
+        const description = document.createElement('textarea');
+        description.contenteditable = false;
+        card.appendChild(description);
 
-                listBody.appendChild(card);
-              }
-            }
-          }
-        }
-      };
-      xhr.send();
-    });
-    addCardButtons.forEach(function(addCardButton) {
-    addCardButton.addEventListener('click', function() {
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.setAttribute('data-id', Math.random().toString(36).substring(2, 15)); // generate a random id
+        description.value = '';
 
-    const title = document.createElement('input');
-    title.type = 'text';
-    title.contenteditable = true;
-    card.appendChild(title);
+        description.addEventListener('textarea', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
 
-    const description = document.createElement('textarea');
-    description.contenteditable = true;
-    description.setAttribute('name', 'description');
-    card.appendChild(description);
+        const listBody = addCardButton.parentNode.nextElementSibling;
+        listBody.appendChild(card);
 
-    title.value = '';
-    description.value = '';
+        card.addEventListener('dragstart', function() {
+          draggedItem = card;
+          setTimeout(function() {
+            card.style.display = 'none';
+          }, 0);
+        });
 
-    const listBody = addCardButton.parentNode.nextElementSibling;
-    listBody.appendChild(card);
+        card.addEventListener('dragend', function() {
+          setTimeout(function() {
+            draggedItem.style.display = 'block';
+            draggedItem = null;
+          }, 0);
+        });
 
-    let timeoutId; // define a variable to hold the timeout ID
+        for (let j = 0; j < lists.length; j++) {
+          const list = lists[j];
 
-    // add event listener to submit the form data to the server when the input fields are blurred
-    title.addEventListener('blur', function() {
-      const formData = {
-        id: card.getAttribute('data-id'), // add id to form data
-        title: title.value,
-        description: description.value,
-        status: listBody.parentNode.querySelector('.list-title').textContent
-      };
+          list.addEventListener('dragover', function(e) {
+            e.preventDefault();
+          });
 
-      if (formData.title.trim() === '' && formData.description.trim() === '') {
-        // do nothing if the card title and description are empty
-        return;
-      }
+          list.addEventListener('dragenter', function(e) {
+            e.preventDefault();
+          });
 
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/save-card', true);
-      xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-      xhr.onload = function() {
-        if (this.status === 200) {
-          console.log('Card saved successfully!');
-        }
-      };
-      xhr.send(JSON.stringify(formData));
-    });
+          list.addEventListener('dragleave', function(e) {
+          });
 
-    // debounce the description input event
-    description.addEventListener('input', function() {
-      clearTimeout(timeoutId); // clear the previous timeout
-      timeoutId = setTimeout(function() {
-        const formData = {
-          id: card.getAttribute('data-id'), // add id to form data
-          title: title.value,
-          description: description.value,
-          status: listBody.parentNode.querySelector('.list-title').textContent
-        };
-
-        if (formData.title.trim() === '' && formData.description.trim() === '') {
-          // do nothing if the card title and description are empty
-          return;
+          list.addEventListener('drop', function(e) {
+            console.log('drop');
+            this.appendChild(draggedItem);
+          });
         }
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/save-card', true);
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        xhr.onload = function() {
-          if (this.status === 200) {
-            console.log('Card saved successfully!');
-          }
-        };
-        xhr.send(JSON.stringify(formData));
-      }, 500); // wait for 500 milliseconds before sending the request
-    });
-  });
-});
+        title.addEventListener('blur', function() {
+          card.classList.remove('is-editing');
+        });
+
+        title.addEventListener('focus', function() {
+          card.classList.add('is-editing');
+        });
+
+        // If the card element now has the "is-editing" class, focus on the title element
+        if (card.classList.contains('is-editing')) {
+          title.focus();
+        }
+      });
+    }
+
+
+
+
+    //     function allowDrop(event) {
+    //         event.preventDefault();
+    //       }
+
+    //     function drag(event) {
+    //         event.dataTransfer.setData("text", event.target.id);
+    //       }
+
+    //       function drop(event, status) {
+    //         event.preventDefault();
+    //         var data = event.dataTransfer.getData("text");
+    //         var element = document.getElementById(data);
+    //         var parent = element.parentNode;
+
+    //         if (status === 'inprogress' && parent.id !== 'inprogress-list') {
+    //           document.getElementById('inprogress-list').appendChild(element);
+    //         } else if (status === 'done' && parent.id !== 'done-list') {
+    //           document.getElementById('done-list').appendChild(element);
+    //         } else if (status === 'todo' && parent.id !== 'todo-list') {
+    //           document.getElementById('todo-list').appendChild(element);
+    //         }
+    //       }
+
+    //     function addTask() {
+    //         var input = document.getElementById('task-input');
+    //         var task = input.value;
+    //         if (task !== '') {
+    //           var element = document.createElement('li');
+    //           element.draggable = true;
+    //           element.id = 'item' + (document.querySelectorAll('.list li').length + 1);
+    //           element.innerHTML = task;
+    //           element.ondragstart = function(event) {
+    //             drag(event);
+    //           }
+    //           document.getElementById('todo-list').appendChild(element);
+    //           input.value = '';
+    //         }
+    //       }
+
+
+
 
 </script>
 
