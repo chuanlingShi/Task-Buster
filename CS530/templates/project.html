@@ -10,21 +10,18 @@ Project
         <section class="container">
             <div class="list-column">
                 <div class="list">
-                    <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(46, 215, 216); padding-left: 15px; padding-right: 15px; border-radius: 4px ">
+                    <div class="list-header">
                         <h2 class="list-title">To Do</h2>
                         <button class="add-card">+ Add a card</button>
-                        
                     </div>
                     <div class="list-body">
-                            
-                    </div>                
-                    
+                    </div>
                     <div class="list-footer">
                         <button class="delete-list">Delete List</button>
                     </div>
                 </div>
                 <div class="list">
-                    <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(0, 170, 255); padding-left: 15px; padding-right: 15px; border-radius: 4px">
+                    <div class="list-header">
                         <h2 class="list-title">In Progress</h2>
                         <button class="add-card">+ Add a card</button>
                     </div>
@@ -35,7 +32,7 @@ Project
                     </div>
                 </div>
                 <div class="list">
-                    <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(161, 121, 242); padding-left: 15px; padding-right: 15px; border-radius: 4px ">
+                    <div class="list-header">
                         <h2 class="list-title">Done</h2>
                         <button class="add-card">+ Add a card</button>
                     </div>
@@ -49,86 +46,82 @@ Project
         </section>
     </main>
 
+    <script src="../static/JS/projectHandler.js"></script>
+</body>
 <script>
+    // const addCardButtons = document.querySelectorAll('.add-card');
+// const lists = document.querySelectorAll('.list-body');
+// let draggedItem = null;
 
+// for (let i = 0; i < addCardButtons.length; i++) {
+//   const addCardButton = addCardButtons[i];
+//   addCardButton.addEventListener('click', function() {
+//     const card = document.createElement('div');
+//     card.classList.add('card');
+//     card.setAttribute('draggable', true);
 
+//     const description = document.createElement('textarea');
+//     description.contenteditable = false;
+//     card.appendChild(description);
 
-    const addCardButtons = document.querySelectorAll('.add-card');
-    const lists = document.querySelectorAll('.list-body');
-    let draggedItem = null;
+//     description.value = '';
 
-    for (let i = 0; i < addCardButtons.length; i++) {
-      const addCardButton = addCardButtons[i];
-      addCardButton.addEventListener('click', function() {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.setAttribute('draggable', true);
+//     description.addEventListener('textarea', function() {
+//         this.style.height = 'auto';
+//         this.style.height = this.scrollHeight + 'px';
+//     });
 
-        const description = document.createElement('textarea');
-        description.contenteditable = false;
-        card.appendChild(description);
+//     const listBody = addCardButton.parentNode.nextElementSibling;
+//     listBody.appendChild(card);
 
-        description.value = '';
+//     card.addEventListener('dragstart', function() {
+//       draggedItem = card;
+//       setTimeout(function() {
+//         card.style.display = 'none';
+//       }, 0);
+//     });
 
-        description.addEventListener('textarea', function() {
-            this.style.height = 'auto';
-            this.style.height = this.scrollHeight + 'px';
-        });
+//     card.addEventListener('dragend', function() {
+//       setTimeout(function() {
+//         draggedItem.style.display = 'block';
+//         draggedItem = null;
+//       }, 0);
+//     });
 
-        const listBody = addCardButton.parentNode.nextElementSibling;
-        listBody.appendChild(card);
+//     for (let j = 0; j < lists.length; j++) {
+//       const list = lists[j];
 
-        card.addEventListener('dragstart', function() {
-          draggedItem = card;
-          setTimeout(function() {
-            card.style.display = 'none';
-          }, 0);
-        });
+//       list.addEventListener('dragover', function(e) {
+//         e.preventDefault();
+//       });
 
-        card.addEventListener('dragend', function() {
-          setTimeout(function() {
-            draggedItem.style.display = 'block';
-            draggedItem = null;
-          }, 0);
-        });
+//       list.addEventListener('dragenter', function(e) {
+//         e.preventDefault();
+//       });
 
-        for (let j = 0; j < lists.length; j++) {
-          const list = lists[j];
+//       list.addEventListener('dragleave', function(e) {
+//       });
 
-          list.addEventListener('dragover', function(e) {
-            e.preventDefault();
-          });
+//       list.addEventListener('drop', function(e) {
+//         console.log('drop');
+//         this.appendChild(draggedItem);
+//       });
+//     }
 
-          list.addEventListener('dragenter', function(e) {
-            e.preventDefault();
-          });
+//     title.addEventListener('blur', function() {
+//       card.classList.remove('is-editing');
+//     });
 
-          list.addEventListener('dragleave', function(e) {
-          });
+//     title.addEventListener('focus', function() {
+//       card.classList.add('is-editing');
+//     });
 
-          list.addEventListener('drop', function(e) {
-            console.log('drop');
-            this.appendChild(draggedItem);
-          });
-        }
-
-        title.addEventListener('blur', function() {
-          card.classList.remove('is-editing');
-        });
-
-        title.addEventListener('focus', function() {
-          card.classList.add('is-editing');
-        });
-
-        // If the card element now has the "is-editing" class, focus on the title element
-        if (card.classList.contains('is-editing')) {
-          title.focus();
-        }
-      });
-    }
-
-
-
+//     // If the card element now has the "is-editing" class, focus on the title element
+//     if (card.classList.contains('is-editing')) {
+//       title.focus();
+//     }
+//   });
+// }
 
     //     function allowDrop(event) {
     //         event.preventDefault();
@@ -143,7 +136,7 @@ Project
     //         var data = event.dataTransfer.getData("text");
     //         var element = document.getElementById(data);
     //         var parent = element.parentNode;
-            
+
     //         if (status === 'inprogress' && parent.id !== 'inprogress-list') {
     //           document.getElementById('inprogress-list').appendChild(element);
     //         } else if (status === 'done' && parent.id !== 'done-list') {
@@ -168,12 +161,6 @@ Project
     //           input.value = '';
     //         }
     //       }
-
-
-
-
 </script>
-
-
 
 {% endblock %}
