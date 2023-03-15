@@ -126,6 +126,9 @@ def load_user(user_id):
 
 @app.route('/')
 def home():
+    if not current_user.is_authenticated:
+        flash('Please log in to access this page.', 'warning')
+        return redirect(url_for('login'))
     return render_template('home.html')
 
 
@@ -144,7 +147,7 @@ def note():
         except:
             return 'There was a problem adding that note.'
     else:
-        notes = Note.query.all()
+        notes = Note.query.filter_by(user_id=current_user.id).all()
     return render_template('note.html', notes=notes)
 
 
@@ -157,7 +160,7 @@ def delete(id):
         db.session.commit()
         return redirect(url_for('note'))
     except:
-        return 'There was a problem deleting that note'
+        return 'There was a problem deleting that note.'
 
 
 @app.route('/project')
@@ -234,8 +237,8 @@ def dashboard():
     if not current_user.is_authenticated:
         flash('Please log in to access this page.', 'warning')
         return redirect(url_for('login'))
-
-        tasks = get_Mytasks()
+    
+    tasks = get_Mytasks()
     return render_template('home.html', tasks=tasks)
 
 
