@@ -50,15 +50,21 @@ function createCard(cardId, titleText, descriptionText) {
   description.value = descriptionText;
   card.appendChild(description);
 
-  addEventListenersForCard(card, title, description);
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Delete';
+  deleteButton.classList.add('delete-button');
+  card.appendChild(deleteButton);
+
+  addEventListenersForCard(card, title, description, deleteButton);
 
   return card;
 }
 
-function addEventListenersForCard(card, title, description) {
+function addEventListenersForCard(card, title, description, deleteButton) {
   title.addEventListener('blur', () => updateCardInDatabase(card));
   description.addEventListener('input', debounce(() => updateCardInDatabase(card), 500));
   addDragAndDropEventListeners(card);
+  deleteButton.addEventListener('click', () => deleteCard(card));
 }
 
 function updateCardInDatabase(card) {
@@ -86,6 +92,21 @@ function debounce(fn, delay) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => fn.apply(this, args), delay);
   };
+}
+
+function deleteCard(card) {
+  const cardId = card.getAttribute('data-id');
+  card.remove();
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/delete-card', true);
+  xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  xhr.onload = function () {
+    if (this.status === 200) {
+      console.log('Card deleted successfully!');
+    }
+  };
+  xhr.send(JSON.stringify({ id: cardId }));
 }
 
 function addDragAndDropEventListeners(card) {

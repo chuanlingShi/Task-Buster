@@ -57,6 +57,22 @@ def save_card():
     return jsonify({'message': message})
 
 
+@app.route('/delete-card', methods=['POST'])
+def delete_card():
+    data = request.get_json()
+    card_id = data['id']
+
+    card = Card.query.filter_by(id=card_id).first()
+    if card:
+        db.session.delete(card)
+        db.session.commit()
+        message = 'Card deleted successfully!'
+    else:
+        message = 'Card not found!'
+
+    return jsonify({'message': message})
+
+
 @app.route('/get-tasks')
 def get_tasks():
     user_id = current_user.id
