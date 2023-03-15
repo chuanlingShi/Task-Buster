@@ -13,10 +13,8 @@ Project
                     <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(46, 215, 216); padding-left: 15px; padding-right: 15px; border-radius: 4px ">
                         <h2 class="list-title">To Do</h2>
                         <button class="add-card">+ Add a card</button>
-                        
                     </div>
                     <div class="list-body">
-                            
                     </div>
                 </div>
                 <div class="list">
@@ -26,7 +24,6 @@ Project
                     </div>
                     <div class="list-body">
                     </div>
-
                 </div>
                 <div class="list">
                     <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(161, 121, 242); padding-left: 15px; padding-right: 15px; border-radius: 4px ">
@@ -39,9 +36,8 @@ Project
             </div>
         </section>
     </main>
-    <script src="../static/JS/projectHandler.js"></script>
-    
-</body>
-
+    <script src="{{ url_for('static', filename='JS/projectHandler.js') }}"></script>
+    <script src="{{ url_for('static', filename='JS/addList.js') }}"></script>
 
 {% endblock %}
+

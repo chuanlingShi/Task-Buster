@@ -87,5 +87,20 @@
       flex-direction: column;
       justify-content: top;
     }
+    .add-list-container {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+.add-list-button {
+  background-color: #f8f9fa;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #495057;
+}
 
 
