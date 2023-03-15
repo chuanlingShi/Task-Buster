@@ -13,21 +13,21 @@ Project
 
     <main>
 
+
         <section class="container">
-            {% if current_user.is_authenticated %}
-
-
             <div class="list-column">
                 <div class="list">
-                    <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(46, 215, 216); padding-left: 15px; padding-right: 15px; border-radius: 4px ">
+                    <div class="list-header"
+                        style="height: 60px; align-items: center; background-color: #EF5B5B; padding-left: 15px; padding-right: 15px; border-radius: 4px ">
                         <h2 class="list-title">To Do</h2>
                         <button class="add-card">+ Add a card</button>
                     </div>
                     <div class="list-body">
                     </div>
                 </div>
+
                 <div class="list">
-                    <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(0, 170, 255); padding-left: 15px; padding-right: 15px; border-radius: 4px">
+                    <div class="list-header" style="height: 60px; align-items: center; background-color: #FFBA49; padding-left: 15px; padding-right: 15px; border-radius: 4px">
                         <h2 class="list-title">In Progress</h2>
                         <button class="add-card">+ Add a card</button>
                     </div>
@@ -35,17 +35,27 @@ Project
                     </div>
                 </div>
                 <div class="list">
-                    <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(161, 121, 242); padding-left: 15px; padding-right: 15px; border-radius: 4px ">
+                    <div class="list-header" style="height: 60px; align-items: center; background-color: #21A39F; padding-left: 15px; padding-right: 15px; border-radius: 4px ">
                         <h2 class="list-title">Done</h2>
                         <button class="add-card">+ Add a card</button>
                     </div>
                     <div class="list-body">
                     </div>
                 </div>
+                {% for list in lists %}
+                {% if list != "To Do" and list != "In Progress" and list != "Done" %}
+                <div class="list">
+                    <div class="list-header"
+                        style="height: 60px; align-items: center; background-color: #A4A9AD; padding-left: 15px; padding-right: 15px; border-radius: 4px ">
+                        <h2 class="list-title">{{list}}</h2>
+                        <button class="add-card">+ Add a card</button>
+                    </div>
+                    <div class="list-body">
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
             </div>
-            {% else %}
-
-            {% endif %}
         </section>
     </main>
     <script src="{{ url_for('static', filename='JS/projectHandler.js') }}"></script>

@@ -163,10 +163,13 @@ def delete(id):
         return 'There was a problem deleting that note.'
 
 
-@app.route('/project')
+@app.route('/project', methods=['GET'])
 def project():
     if current_user.is_authenticated:
-        return render_template('project.html')
+        lists = Card.query.with_entities(Card.status.distinct()).filter_by(
+            user_id=current_user.id).all()
+        status_list = [status[0] for status in lists]
+        return render_template('project.html', lists=status_list)
     else:
         return redirect(url_for('login'))
 

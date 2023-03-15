@@ -12,6 +12,8 @@ const colors = [
   'rgb(255, 235, 59)'
 ];
 
+const color = '#A4A9AD';
+
 addListButton.addEventListener('click', function () {
   const listTitle = prompt('Enter the list title:');
   if (listTitle) {
@@ -31,7 +33,7 @@ function createList(titleText) {
   listHeader.style.paddingLeft = '15px';
   listHeader.style.paddingRight = '15px';
   listHeader.style.borderRadius = '4px';
-  listHeader.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+  listHeader.style.backgroundColor = color;
   list.appendChild(listHeader);
 
   const listTitle = document.createElement('h2');
