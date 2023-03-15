@@ -2,6 +2,11 @@
 
 {% set active = "Home" %}
 
+{% block header %}
+    {{ super() }}
+    <script src="../static/JS/projectHandler.js"></script>
+{% endblock %}
+
 {% block title %}
 Home
 {% endblock %}
@@ -15,67 +20,49 @@ Home
     </div>
 
 
-    <section class="products"> 
-        <div style="position:absolute; top:550px; left:310px;">
-            <div class="col1">
-                <h1 style="font-weight: bold; font-size: 70px;">Welcome</h1>
-                    <div id="clock" class="textT"></div>
-                    
-                    <script>
-                        function updateTime() {
-                            var now = new Date();
-                            var hours = now.getHours();
-                            var minutes = now.getMinutes();
-                            var seconds = now.getSeconds();
-                            var timeString = hours + ':' + minutes + ':' + seconds;
-                            document.getElementById('clock').innerHTML = timeString;
-                        }
+    <section class="products">        
+        <div class="col1">
+            <h1 style="font-weight: bold; font-size: 70px;">Welcome</h1>
+            <div id="clock" class="textT"></div>
+                
+            <script>
+                function updateTime() {
+                    var now = new Date();
+                    var hours = now.getHours();
+                    var minutes = now.getMinutes();
+                    var seconds = now.getSeconds();
+                    var timeString = hours + ':' + minutes + ':' + seconds;
+                    document.getElementById('clock').innerHTML = timeString;
+                }
 
-                        // Update the time every second
-                        setInterval(updateTime, 1000);
-                    </script>                                               
+                // Update the time every second
+                setInterval(updateTime, 1000);
+            </script>                                               
 
-                    <br>
+            <br>
 
-                    <div class="textP">“When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us.”</div>
-            </div>
+            <div class="textP">“When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us.”</div>
+
         </div>
+        
         
     </section>
 
     <section class="products"> 
-        <div style="position:absolute; top:100px; left:1000px;">
-            <div class="col2">
-                <div style="height: 60px; margin-right: 10px; border-bottom-width: 1px; align-items: center; justify-content: space-between; border-color: rgba(255, 255, 255, 0.2);">
-                    <div style="align-items: center; opacity: 1;">
-                        <div >
-                            <div class="kr-text react-popover-trigger react-popover-trigger-popover-mytasks-actions" style="padding-right: 10px; font-size: 17px; line-height: 25px; font-weight: 500; letter-spacing: normal; color: black; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; cursor: pointer;">My Tasks</div>
-                        </div>
-                    </div>                     
-                </div>
-            </div>
+        <div class="col2">
+            <div>My Tasks</div>
+
         </div>
+        
     </section>
 
 
     <section class="products"> 
-        <div style="position:absolute; top:100px; left:1470px;">
-            <div class="col2">
-                <div class="kr-view" style="opacity: 1; width: 360px; overflow: hidden;">
-                    <div class="kr-view" style="width: 360px; height: 100%; padding-right: 30px; flex-direction: column;">
-                        <div class="kr-view" style="flex-grow: 1; flex-direction: column; width: 100%;">
-                            <div class="kr-view" style="height: 60px; margin-right: 10px; border-bottom-width: 1px; align-items: center; justify-content: space-between; border-color: rgba(255, 255, 255, 0.2);">
-                                <div class="kr-view" style="align-items: center; opacity: 1;">
-                                    <div class="kr-view">
-                                        <div class="kr-text react-popover-trigger react-popover-trigger-popover-usernotifications-actions" style="padding-right: 10px; font-size: 17px; line-height: 25px; font-weight: 500; letter-spacing: normal; color: black; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; cursor: pointer;">Notifications</div> 
-                                    </div>
-                                </div>                                    
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        <div class="col3">
+            <div>Notifications</div> 
+        </div>                       
+
     </section>
 
 

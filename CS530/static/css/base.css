@@ -54,8 +54,6 @@
 
 
 
-
-
     .col1{
       width: 20%;
       float: left;
@@ -70,6 +68,11 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      position: fixed;
+      bottom: 0;
+      left: 16.5%;
+      border: 3px solid #73AD21;
+
     }
 
     .col2{
@@ -86,6 +89,10 @@
       display: flex;
       flex-direction: column;
       justify-content: top;
+      position: fixed;
+      top: 6.1%;
+      left: 47%;
+      border: 3px solid #73AD21;
     }
     .add-list-container {
   display: inline-block;
@@ -102,5 +109,32 @@
   font-weight: bold;
   color: #495057;
 }
+
+
+    .col3{
+        width: 20%;
+      float: left;
+      overflow: hidden;
+      background: rgba(0,0,0,0.1);
+      height: 600px;
+      width: 400px;
+      padding-right: 20px;
+      padding-left: 20px;
+      text-align: center;
+      align-items: top;
+      display: flex;
+      flex-direction: column;
+      justify-content: top;
+      position: fixed;
+      top: 6.1%;
+      left: 70%;
+      border: 3px solid #73AD21;
+    
+    }
+
+
+
+
+
 
 
