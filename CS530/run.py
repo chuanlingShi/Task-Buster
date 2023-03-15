@@ -225,24 +225,48 @@ def logout():
 with app.app_context():
     db.create_all()
 
-if __name__ == '__main__':
-    app.run(host='localhost', port=8080, debug=True)
-
-
+    
 
 @app.route('/home', methods=['GET', 'POST'])
 def dashboard():
     if not current_user.is_authenticated:
         flash('Please log in to access this page.', 'warning')
         return redirect(url_for('login'))
-    return render_template('home.html')
 
-    
-
-
+        tasks = get_Mytasks()
+    return render_template('home.html', tasks=tasks)
 
 
 
+@app.route('/get-Mytasks')
+def get_Mytasks():
+    user_id = current_user.id
+    todo_list = Card.query.filter_by(user_id=user_id).filter_by(status='In Progress').all()
+    tasks = {}
+    for card in todo_list:
+        task = {
+            'id': card.id,
+            'title': card.title,
+            'description': card.description,
+            'status': card.status
+        }
+        tasks[card.id] = task
+    return jsonify(tasks)
+
+
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    app.run(host='localhost', port=8080, debug=True)
 
 
 
