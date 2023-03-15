@@ -214,14 +214,6 @@ def signup():
     return render_template('signup.html', form=form)
 
 
-@app.route('/home')
-def dashboard():
-    if not current_user.is_authenticated:
-        flash('Please log in to access this page.', 'warning')
-        return redirect(url_for('login'))
-    return render_template('home.html')
-
-
 @app.route('/logout')
 def logout():
     logout_user()
@@ -235,3 +227,22 @@ with app.app_context():
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
+
+
+
+@app.route('/home', methods=['GET', 'POST'])
+def dashboard():
+    if not current_user.is_authenticated:
+        flash('Please log in to access this page.', 'warning')
+        return redirect(url_for('login'))
+    return render_template('home.html')
+
+    
+
+
+
+
+
+
+
+

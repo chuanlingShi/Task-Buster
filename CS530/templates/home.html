@@ -2,6 +2,11 @@
 
 {% set active = "Home" %}
 
+{% block header %}
+    {{ super() }}
+    <script src="../static/JS/projectHandler.js"></script>
+{% endblock %}
+
 {% block title %}
 Home
 {% endblock %}
@@ -46,6 +51,7 @@ Home
     <section class="products"> 
         <div class="col2">
             <div>My Tasks</div>
+
         </div>
         
     </section>
