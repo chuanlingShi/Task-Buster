@@ -1,4 +1,5 @@
 const addCardButtons = document.querySelectorAll('.add-card');
+
 window.addEventListener('DOMContentLoaded', function () {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', '/get-tasks');
@@ -12,26 +13,8 @@ window.addEventListener('DOMContentLoaded', function () {
         if (status in tasks) {
           for (let j = 0; j < tasks[status].length; j++) {
             const task = tasks[status][j];
-            const card = document.createElement('div');
-            card.classList.add('card');
-            card.setAttribute('data-id', task.id);
-
-            const title = document.createElement('input');
-            title.type = 'text';
-            title.contenteditable = true;
-            title.value = task.title;
-            card.appendChild(title);
-
-            const description = document.createElement('textarea');
-            description.contenteditable = true;
-            description.setAttribute('name', 'description');
-            description.value = task.description;
-            card.appendChild(description);
-
+            const card = createCard(task.id, task.title, task.description);
             listBody.appendChild(card);
-
-            // Add event listeners for existing cards
-            addEventListenersForCard(card, title, description);
           }
         }
       }
@@ -42,16 +25,40 @@ window.addEventListener('DOMContentLoaded', function () {
 
 addCardButtons.forEach(function (addCardButton) {
   addCardButton.addEventListener('click', function () {
-    // ... (Existing code for creating a new card)
-
-    // Add event listeners for new cards
-    addEventListenersForCard(card, title, description);
+    const cardId = Math.random().toString(36).substring(2, 15); // generate a random id
+    const card = createCard(cardId, '', '');
+    const listBody = addCardButton.parentNode.nextElementSibling;
+    listBody.appendChild(card);
   });
 });
+
+function createCard(cardId, titleText, descriptionText) {
+  const card = document.createElement('div');
+  card.classList.add('card');
+  card.setAttribute('data-id', cardId);
+  card.setAttribute('draggable', true);
+
+  const title = document.createElement('input');
+  title.type = 'text';
+  title.contenteditable = true;
+  title.value = titleText;
+  card.appendChild(title);
+
+  const description = document.createElement('textarea');
+  description.contenteditable = true;
+  description.setAttribute('name', 'description');
+  description.value = descriptionText;
+  card.appendChild(description);
+
+  addEventListenersForCard(card, title, description);
+
+  return card;
+}
 
 function addEventListenersForCard(card, title, description) {
   title.addEventListener('blur', () => updateCardInDatabase(card));
   description.addEventListener('input', debounce(() => updateCardInDatabase(card), 500));
+  addDragAndDropEventListeners(card);
 }
 
 function updateCardInDatabase(card) {
@@ -79,4 +86,43 @@ function debounce(fn, delay) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => fn.apply(this, args), delay);
   };
+}
+
+function addDragAndDropEventListeners(card) {
+  card.addEventListener('dragstart', function (event) {
+    event.dataTransfer.setData('text/plain', card.getAttribute('data-id'));
+    event.dataTransfer.effectAllowed = 'move';
+    card.classList.add('dragging');
+  });
+
+  card.addEventListener('dragend', function (event) {
+    card.classList.remove('dragging');
+  });
+
+  const lists = document.querySelectorAll('.list');
+
+  lists.forEach(function (list) {
+    list.addEventListener('dragover', function (event) {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = 'move';
+      list.classList.add('drag-over');
+    });
+
+    list.addEventListener('dragleave', function (event) {
+      list.classList.remove('drag-over');
+    });
+
+    list.addEventListener('drop', function (event) {
+      event.preventDefault();
+      const cardId = event.dataTransfer.getData('text/plain');
+      const card = document.querySelector(`[data-id="${cardId}"]`);
+      const oldList = card.parentNode;
+      const newList = list.querySelector('.list-body');
+      newList.appendChild(card);
+      list.classList.remove('drag-over');
+
+      // Update card status in the database
+      updateCardInDatabase(card);
+    });
+  });
 }
