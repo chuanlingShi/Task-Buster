@@ -162,7 +162,10 @@ def delete(id):
 
 @app.route('/project')
 def project():
-    return render_template('project.html')
+    if current_user.is_authenticated:
+        return render_template('project.html')
+    else:
+        return redirect(url_for('login'))
 
 
 @csrf.exempt
@@ -225,7 +228,6 @@ def logout():
 with app.app_context():
     db.create_all()
 
-    
 
 @app.route('/home', methods=['GET', 'POST'])
 def dashboard():
@@ -235,7 +237,6 @@ def dashboard():
 
         tasks = get_Mytasks()
     return render_template('home.html', tasks=tasks)
-
 
 
 @app.route('/get-Mytasks')
@@ -254,19 +255,5 @@ def get_Mytasks():
     return jsonify(tasks)
 
 
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
-
-
-

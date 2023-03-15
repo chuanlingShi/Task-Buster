@@ -6,8 +6,13 @@ Project
 {% endblock %}
 
 {% block content %}
+
     <main>
+
         <section class="container">
+            {% if current_user.is_authenticated %}
+
+
             <div class="list-column">
                 <div class="list">
                     <div class="list-header" style="height: 60px; align-items: center; background-color: rgb(46, 215, 216); padding-left: 15px; padding-right: 15px; border-radius: 4px ">
@@ -34,6 +39,9 @@ Project
                     </div>
                 </div>
             </div>
+            {% else %}
+
+            {% endif %}
         </section>
     </main>
     <script src="{{ url_for('static', filename='JS/projectHandler.js') }}"></script>
