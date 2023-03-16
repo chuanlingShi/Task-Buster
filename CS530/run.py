@@ -261,5 +261,16 @@ def get_Mytasks():
     return jsonify(tasks)
 
 
+@app.route('/notifications')
+def notifications():
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT content FROM note")
+    notifications = cursor.fetchall()
+    conn.close()
+    return render_template('base.html', notifications=notifications)
+
+
+
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)

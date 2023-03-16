@@ -33,10 +33,39 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link bell-link" href="#">
+                        <a class="nav-link bell-link" href="#" id="bell-icon">
                             <i class="fas fa-bell bell-icon"></i>
                         </a>
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2>Notifications```````</h2>
+                                {% for notification in notifications %}
+                                <p>{{ notification[0] }}</p>
+                                {% endfor %}
+                              </div>
+                        </div>
 
+
+
+                        <script>
+
+                            var bellIcon = document.querySelector(".bell-icon");
+                            var modal = document.getElementById("myModal");
+
+                            var closeButton = modal.querySelector(".close");
+
+                            bellIcon.addEventListener("click", function() {
+                                modal.style.display = "block";
+                            });
+
+                            closeButton.addEventListener("click", function() {
+                                modal.style.display = "none";
+                            });
+                        
+                        </script>
+
+                    </li>
                     {% if current_user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
