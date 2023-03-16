@@ -51,6 +51,8 @@ function createCard(cardId, titleText, descriptionText) {
   card.appendChild(description);
 
   const deleteButton = document.createElement('button');
+  deleteButton.classList.add("btn");
+  deleteButton.classList.add("btn-outline-secondary");
   deleteButton.textContent = 'Delete';
   deleteButton.classList.add('delete-button');
   card.appendChild(deleteButton);

@@ -1,5 +1,7 @@
 const addListButton = document.createElement('button');
 addListButton.classList.add('add-list-button');
+  addListButton.classList.add("btn");
+  addListButton.classList.add("btn-outline-secondary");
 addListButton.textContent = 'Add List';
 document.querySelector('.list-column').appendChild(addListButton);
 
@@ -42,7 +44,10 @@ function createList(titleText) {
   listHeader.appendChild(listTitle);
 
   const addCardButton = document.createElement('button');
-  addCardButton.classList.add('add-card');
+  addCardButton.classList.add("add-card");
+  addCardButton.classList.add("btn");
+  addCardButton.classList.add("btn-light");
+
   addCardButton.textContent = '+ Add a card';
   listHeader.appendChild(addCardButton);
 
