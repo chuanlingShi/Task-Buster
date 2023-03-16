@@ -1,23 +1,26 @@
-        .nav-item a:hover{
-            background: #666
-        }
-        .bell-icon {
-            color: white;
+    .nav-item a:hover {
+        background: #666;
+    }
 
-        }
+    .bell-icon {
+        color: white;
+    }
 
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-primary:hover {
-            background-color: #0069d9;
-            border-color: #0062cc;
-        }
-        .btn-primary:active, .btn-primary:focus {
-            background-color: #0062cc;
-            border-color: #005cbf;
-        }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+
+    .btn-primary:active,
+    .btn-primary:focus {
+        background-color: #0062cc;
+        border-color: #005cbf;
+    }
 
 
     .products{
@@ -94,21 +97,7 @@
       left: 47%;
       border: 3px solid #73AD21;
     }
-    .add-list-container {
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 10px;
-}
 
-.add-list-button {
-  background-color: #f8f9fa;
-  border: none;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #495057;
-}
 
 
     .col3{
@@ -129,8 +118,96 @@
       top: 6.1%;
       left: 70%;
       border: 3px solid #73AD21;
-    
+
     }
+
+    .add-list-container {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+    }
+
+    .add-list-button {
+        background-color: #f8f9fa;
+        border: none;
+        cursor: pointer;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #495057;
+    }
+
+    body {
+        font-family: 'Nunito', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container-fluid {
+        padding: 0;
+    }
+
+    .row.min-vh-100 {
+        min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .col-2.bg-dark {
+        padding: 0;
+    }
+
+    /* Main content */
+    .col {
+        padding: 0;
+        margin: 0;
+    }
+
+    .list-column {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .list {
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        min-width: 320px;
+        max-width: 480px; /* 根据需要调整列表宽度 */
+        flex-grow: 1;
+        margin-bottom: 1rem;
+    }
+
+    .list-header {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .list-title {
+        color: #ffffff;
+        margin: 0;
+    }
+
+    .add-card {
+        background-color: rgba(255, 255, 255, 0.3);
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        font-size: 14px;
+        cursor: pointer;
+        margin-left: 1rem;
+    }
+
+    .list-body {
+        padding: 1rem;
+    }
+
 
 
 

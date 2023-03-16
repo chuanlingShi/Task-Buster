@@ -2,64 +2,58 @@
 {% set active = "project" %}
 
 {% block header %}
-    <link rel="stylesheet" href="../static/css/project.css">
+<link rel="stylesheet" href="../static/css/project.css">
 {% endblock %}
 
 {% block title %}
 Project
 {% endblock %}
-
 {% block content %}
 
-    <main>
-
-
-        <section class="container">
-            <div class="list-column">
-                <div class="list">
-                    <div class="list-header"
-                        style="height: 60px; align-items: center; background-color: #EF5B5B; padding-left: 15px; padding-right: 15px; border-radius: 4px ">
-                        <h2 class="list-title">To Do</h2>
-                        <button class="add-card">+ Add a card</button>
-                    </div>
-                    <div class="list-body">
-                    </div>
+<main>
+    <section class="container">
+        <div class="list-column">
+            <div class="list">
+                <div class="list-header" style="background-color: #EF5B5B;">
+                    <h2 class="list-title">To Do</h2>
+                    <button class="add-card">+ Add a card</button>
                 </div>
-
-                <div class="list">
-                    <div class="list-header" style="height: 60px; align-items: center; background-color: #FFBA49; padding-left: 15px; padding-right: 15px; border-radius: 4px">
-                        <h2 class="list-title">In Progress</h2>
-                        <button class="add-card">+ Add a card</button>
-                    </div>
-                    <div class="list-body">
-                    </div>
+                <div class="list-body">
                 </div>
-                <div class="list">
-                    <div class="list-header" style="height: 60px; align-items: center; background-color: #21A39F; padding-left: 15px; padding-right: 15px; border-radius: 4px ">
-                        <h2 class="list-title">Done</h2>
-                        <button class="add-card">+ Add a card</button>
-                    </div>
-                    <div class="list-body">
-                    </div>
-                </div>
-                {% for list in lists %}
-                {% if list != "To Do" and list != "In Progress" and list != "Done" %}
-                <div class="list">
-                    <div class="list-header"
-                        style="height: 60px; align-items: center; background-color: #A4A9AD; padding-left: 15px; padding-right: 15px; border-radius: 4px ">
-                        <h2 class="list-title">{{list}}</h2>
-                        <button class="add-card">+ Add a card</button>
-                    </div>
-                    <div class="list-body">
-                    </div>
-                </div>
-                {% endif %}
-                {% endfor %}
             </div>
-        </section>
-    </main>
-    <script src="{{ url_for('static', filename='JS/projectHandler.js') }}"></script>
-    <script src="{{ url_for('static', filename='JS/addList.js') }}"></script>
+            <div class="list">
+                <div class="list-header" style="background-color: #FFBA49;">
+                    <h2 class="list-title">In Progress</h2>
+                    <button class="add-card">+ Add a card</button>
+                </div>
+                <div class="list-body">
+                </div>
+            </div>
 
+            <div class="list">
+                <div class="list-header" style="background-color: #21A39F;">
+                    <h2 class="list-title">Done</h2>
+                    <button class="add-card">+ Add a card</button>
+                </div>
+                <div class="list-body">
+                </div>
+            </div>
+
+            {% for list in lists %}
+            {% if list != "To Do" and list != "In Progress" and list != "Done" %}
+            <div class="list">
+                <div class="list-header" style="background-color: #A4A9AD;">
+                    <h2 class="list-title">{{list}}</h2>
+                    <button class="add-card">+ Add a card</button>
+                </div>
+                <div class="list-body">
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+</main>
+<script src="{{ url_for('static', filename='JS/projectHandler.js') }}"></script>
+<script src="{{ url_for('static', filename='JS/addList.js') }}"></script>
 {% endblock %}
-
