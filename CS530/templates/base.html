@@ -43,43 +43,34 @@
                         </a>
                         <div id="myModal" class="modal">
                             <div class="modal-content">
-                                <span class="close" >&times;</span>
+
+                                <div><span class="close" style="padding: 10px">&times;</span>
+                                </div>
+
+                                <!-- <div id="note-list"></div> -->
+                                <div id="task-listN"></div>
                                 
-                                <ul id="notes-list"></ul>
                             </div>
                         </div>
 
 
 
                         <script>
-
                             var bellIcon = document.querySelector(".bell-icon");
                             var modal = document.getElementById("myModal");
 
                             var closeButton = modal.querySelector(".close");
+                            var notesList = modal.querySelector("#note-list");
 
                             bellIcon.addEventListener("click", function() {
-                                // make an AJAX request to the Flask route that fetches the notes from the database
-                                fetch('/get-notes')
-                                .then(response => response.json())
-                                .then(notes => {
-                                    // populate the modal with the notes
-                                    notesList.innerHTML = "";
-                                    notes.forEach(note => {
-                                        var li = document.createElement("li");
-                                        li.innerText = note[1]; // assuming the content is stored in the second column
-                                        notesList.appendChild(li);
-                                    });
-                                });
                                 modal.style.display = "block";
                             });
 
                             closeButton.addEventListener("click", function() {
                                 modal.style.display = "none";
                             });
-
-                        
                         </script>
+
 
                     </li>
                     {% if current_user.is_authenticated %}

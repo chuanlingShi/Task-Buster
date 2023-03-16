@@ -264,19 +264,11 @@ def get_Mytasks():
 
 
 
+
 @app.route('/get-notes')
 def get_notes():
-    # connect to the database
-    conn = sqlite3.connect('users.db')
-    # retrieve data from the database
-    cursor = conn.execute('SELECT * FROM note')
-    notes = cursor.fetchall()
-    conn.close()
-    # return the data in JSON format
-    return jsonify(notes)
-
-
-
+    notes = Note.query.all()
+    return jsonify([(note.id, note.content) for note in notes])
 
 
 

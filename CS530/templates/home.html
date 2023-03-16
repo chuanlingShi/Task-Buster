@@ -30,57 +30,56 @@ Home
         {% endif %}
     </div>
 
-
-
-    <section class="products">        
-        <div class="col1">
-            <h1 style="font-weight: bold; font-size: 70px;">Welcome</h1>
-            <div id="clock" class="textT"></div>
-                
-            <script>
-                function updateTime() {
-                    var now = new Date();
-                    var hours = now.getHours();
-                    var minutes = now.getMinutes();
-                    var seconds = now.getSeconds();
-                    var timeString = hours + ':' + minutes + ':' + seconds;
-                    document.getElementById('clock').innerHTML = timeString;
-                }
-
-                // Update the time every second
-                setInterval(updateTime, 1000);
-            </script>                                               
-
-            <div class="textP">“When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us.”</div>
-
-        </div>
-        
-        
-    </section>
-
-    <section class="products"> 
-        <div class="col2">
-            <div style="font-weight: bold; font-size: 70px; background-color: #fff; border: 3px solid #73AD21; margin-top: 20px; margin-right: 20px; margin-left: 20px;">My Tasks</div>                
+<div class="list-column">
+    <div class="col1">
+        <h1 style="font-weight: bold; font-size: 70px;">Welcome</h1>
+        <div id="clock" class="textT"></div>
             
-            <section class="container">
-                <div class="list-column">
-                    <div class="list">
-                        <div id="task-listT"></div>
-                    </div>
+        <script>
+            function updateTime() {
+                var now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+                var timeString = hours + ':' + minutes + ':' + seconds;
+                document.getElementById('clock').innerHTML = timeString;
+            }
 
-                    <div class="list">
-                        <div id="task-listI"></div>
-                    </div>
+            // Update the time every second
+            setInterval(updateTime, 1000);
+        </script>                                               
 
-                    <div class="list">
-                        <div id="task-listD"></div>
-                    </div>
+        <div class="textP">“When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us.”</div>
 
-                </div>
-            </section>
-        </div>
+    </div>
         
-    </section>
+</div> 
+
+
+
+
+    <div class="col2">
+        <div class="taskT">My Tasks</div>                
+        
+        <section class="container">
+            <div class="list-column">
+                <div class="list">
+                    <div id="task-listT"></div>
+                </div>
+
+                <div class="list">
+                    <div id="task-listI"></div>
+                </div>
+
+                <div class="list">
+                    <div id="task-listD"></div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+        
+
 
 
    
