@@ -1,100 +1,101 @@
-        .nav-item a:hover{
-            background: #666
-        }
-        .bell-icon {
-            color: white;
+.nav-item a:hover{
+    background: #666
+}
+.bell-icon {
+    color: white;
 
-        }
+}
 
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-primary:hover {
-            background-color: #0069d9;
-            border-color: #0062cc;
-        }
-        .btn-primary:active, .btn-primary:focus {
-            background-color: #0062cc;
-            border-color: #005cbf;
-        }
-
-
-    .products{
-      display: flex;
-      padding: 80px;
-      justify-content: space-between;
-      align-items: center;
-      min-width: 1200px;
-    }
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+.btn-primary:active, .btn-primary:focus {
+    background-color: #0062cc;
+    border-color: #005cbf;
+}
 
 
-    .textT{
-      color: black; 
-      font-size: 50px; 
-      font-weight: 700; 
-      line-height: 1; 
-      letter-spacing: -0.01em; 
-      margin-top: 5px; 
-      text-indent: -0.05em;
-      display: block; 
-      white-space: nowrap;
-    }
+.products{
+  display: flex;
+  padding: 80px;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 1200px;
+}
 
 
-    .textP{
-      style="font-size: 17px; 
-      font-weight: 400; 
-      line-height: 25px; 
-      letter-spacing: normal; 
-      color: black; 
-      margin-top: 20px; 
-      text-indent: -0.55em;
-    }
+.textT{
+  color: black; 
+  font-size: 50px; 
+  font-weight: 700; 
+  line-height: 1; 
+  letter-spacing: -0.01em; 
+  margin-top: 5px; 
+  text-indent: -0.05em;
+  display: block; 
+  white-space: nowrap;
+}
+
+
+.textP{
+  style="font-size: 17px; 
+  font-weight: 400; 
+  line-height: 25px; 
+  letter-spacing: normal; 
+  color: black; 
+  margin-top: 20px; 
+  text-indent: -0.55em;
+}
 
 
 
-    .col1{
-      width: 20%;
-      float: left;
-      overflow: hidden;
-      background: rgba(0,0,0,0.1);
-      height: 350px;
-      width: 500px;
-      padding-right: 20px;
-      padding-left: 20px;
-      text-align: center;
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: fixed;
-      bottom: 0;
-      left: 16.5%;
-      border: 3px solid #73AD21;
+.col1{
+  width: 20%;
+  float: left;
+  overflow: hidden;
+  background: rgba(0,0,0,0.1);
+  height: 350px;
+  width: 500px;
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 16.5%;
+  border: 3px solid #73AD21;
 
-    }
+}
 
-    .col2{
-      width: 20%;
-      float: left;
-      overflow: hidden;
-      background: rgba(0,0,0,0.1);
-      height: 600px;
-      width: 400px;
-      padding-right: 20px;
-      padding-left: 20px;
-      text-align: center;
-      align-items: top;
-      display: flex;
-      flex-direction: column;
-      justify-content: top;
-      position: fixed;
-      top: 6.1%;
-      left: 47%;
-      border: 3px solid #73AD21;
-    }
-    .add-list-container {
+.col2{
+  width: 20%;
+  float: left;
+  overflow: hidden;
+  background: rgba(0,0,0,0.1);
+  height: 600px;
+  width: 400px;
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: center;
+  align-items: top;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  position: fixed;
+  top: 6.1%;
+  left: 47%;
+  border: 3px solid #73AD21;
+}
+
+.add-list-container {
   display: inline-block;
   vertical-align: top;
   margin-right: 10px;
@@ -111,29 +112,40 @@
 }
 
 
-    .col3{
-        width: 20%;
-      float: left;
-      overflow: hidden;
-      background: rgba(0,0,0,0.1);
-      height: 600px;
-      width: 400px;
-      padding-right: 20px;
-      padding-left: 20px;
-      text-align: center;
-      align-items: top;
-      display: flex;
-      flex-direction: column;
-      justify-content: top;
-      position: fixed;
-      top: 6.1%;
-      left: 70%;
-      border: 3px solid #73AD21;
-    
-    }
+.col3{
+    width: 20%;
+  float: left;
+  overflow: hidden;
+  background: rgba(0,0,0,0.1);
+  height: 600px;
+  width: 400px;
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: center;
+  align-items: top;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  position: fixed;
+  top: 6.1%;
+  left: 70%;
+  border: 3px solid #73AD21;
+
+}
 
 
 
+.modal {
+    display: none; /* Hide the modal by default */
+    position: fixed; /* Position it on top of the content */
+    z-index: 1; /* Make sure it appears on top */
+    left: 50%;
+    top: 6.1%;
+    width: 50%; /* Full width */
+    height: 50%; /* Full height */
+    overflow: auto; /* Enable scrolling if needed */
+    background-color: rgba(0,0,0,0.2); /* Add a dark overlay */
+}
 
 
 
