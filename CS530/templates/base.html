@@ -42,15 +42,12 @@
                             <i class="fas fa-bell bell-icon"></i>
                         </a>
                         <div id="myModal" class="modal">
-                            <div class="modal-content">
-
-                                <div><span class="close" style="padding: 10px">&times;</span>
-                                </div>
-
-                                <!-- <div id="note-list"></div> -->
-                                <div id="task-listN"></div>
-                                
+                            <div><span class="close" style="padding: 10px; color: white;">&times;</span>
                             </div>
+                            <div class="modal-content">
+                                <div id="task-listN"></div>
+                            </div>
+                            
                         </div>
 
 
@@ -60,7 +57,7 @@
                             var modal = document.getElementById("myModal");
 
                             var closeButton = modal.querySelector(".close");
-                            var notesList = modal.querySelector("#note-list");
+                            
 
                             bellIcon.addEventListener("click", function() {
                                 modal.style.display = "block";

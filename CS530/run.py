@@ -267,8 +267,23 @@ def get_Mytasks():
 
 @app.route('/get-notes')
 def get_notes():
-    notes = Note.query.all()
-    return jsonify([(note.id, note.content) for note in notes])
+    user_id=current_user.id
+    notes = Note.query.filter_by(user_id=user_id).all()
+    notes_dict = [{'user_id': note.id, 'content': note.content} for note in notes]
+    return jsonify(notes_dict)
+
+
+
+# @app.route('/get-notes')
+# def get_notes():
+#     user_id = current_user.id
+#     notes = Note.query.filter_by(user_id=user_id).all()
+#     notes_dict = {}
+#     for note in notes:
+#         if note.user_id not in notes_dict:
+#             notes_dict[note.user_id] = {'user_id': note.user_id, 'notes': []}
+#         notes_dict[note.user_id]['notes'].append({'id': note.id, 'content': note.content})
+#     return jsonify(list(notes_dict.values()))
 
 
 

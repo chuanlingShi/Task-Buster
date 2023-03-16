@@ -14,6 +14,7 @@ function loadTasks() {
             todoList.innerHTML = '<h2>To Do</h2>';
             for (const task of tasks.todo) {
                 const taskElement = document.createElement('div');
+                taskElement.classList.add('user-notes');
                 taskElement.innerHTML = `<h3>${task.title}</h3><p>${task.description}</p>`;
                 todoList.appendChild(taskElement);
             }
@@ -24,6 +25,7 @@ function loadTasks() {
             inprogressList.innerHTML = '<h2>In Progress</h2>';
             for (const task of tasks.inprogress) {
                 const taskElement = document.createElement('div');
+                taskElement.classList.add('user-notes');
                 taskElement.innerHTML = `<h3>${task.title}</h3><p>${task.description}</p>`;
                 inprogressList.appendChild(taskElement);
             }
@@ -34,6 +36,7 @@ function loadTasks() {
             doneList.innerHTML = '<h2>Done</h2>';
             for (const task of tasks.done) {
                 const taskElement = document.createElement('div');
+                taskElement.classList.add('user-notes');
                 taskElement.innerHTML = `<h3>${task.title}</h3><p>${task.description}</p>`;
                 doneList.appendChild(taskElement);
             }
@@ -52,9 +55,12 @@ function loadNTasks() {
   
             // Add In Progress tasks
             const inprogressList = document.createElement('div');
-            inprogressList.innerHTML = '<h2>In Progress</h2>';
+            var inprogressListT = '<h2>Task that are still need to be done</h2>'
+            var inprogressListTT = '<h3>In Progress:</h3>'
+            inprogressList.innerHTML = inprogressListT + inprogressListTT;
             for (const task of tasks.inprogress) {
                 const taskElement = document.createElement('div');
+                taskElement.classList.add('user-notes');
                 taskElement.innerHTML = `<h3>${task.title}</h3><p>${task.description}</p>`;
                 inprogressList.appendChild(taskElement);
             }
@@ -73,17 +79,43 @@ function loadNote() {
     fetch('/get-notes')
     .then(response => response.json())
     .then(notes => {
-        // populate the modal with the notes
-        notesList.innerHTML = "";
-        notes.forEach(note => {
-            var li = document.createElement("li");
-            li.innerText = note[1]; // assuming the content is stored in the second column
-            notesList.appendChild(li);
-        });
+        /// populate the note list with the notes
+        const noteList = document.getElementById('note-list');
+        noteList.innerHTML = '';
+        for (const note of notes) {
+            const div = document.createElement('div');
+            div.classList.add('user-notes');
+            div.innerText = note.content;
+            noteList.appendChild(div);
+        }
     });
 }
 
 loadNote(); // call the function to load the tasks when the page loads
 
 
+// function loadNote() {
+//     // make an AJAX request to the Flask route that fetches the notes from the database
+//     fetch('/get-notes')
+//     .then(response => response.json())
+//     .then(users => {
+//         // populate the note list with the notes for each user
+//         const noteList = document.getElementById('note-list');
+//         noteList.innerHTML = '';
+//         for (const user of users) {
+//             const userDiv = document.createElement('div');
+//             userDiv.classList.add('user-notes');
+            
+//             const notesList = document.createElement('ul');
+//             for (const note of user.notes) {
+//                 const li = document.createElement('li');
+//                 li.innerText = note.content;
+//                 notesList.appendChild(li);
+//             }
+//             userDiv.appendChild(notesList);
+//             noteList.appendChild(userDiv);
+//         }
+//     });
+// }
 
+// loadNote();
