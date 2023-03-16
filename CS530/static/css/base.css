@@ -1,6 +1,7 @@
 .nav-item a:hover{
     background: #666
 }
+
 .bell-icon {
     color: white;
 
@@ -58,11 +59,10 @@
   width: 20%;
   float: left;
   overflow: hidden;
-  background: rgba(0,0,0,0.1);
-  height: 350px;
-  width: 500px;
-  padding-right: 20px;
-  padding-left: 20px;
+  background: rgba(0,0,0,0.01);
+  height: 320px;
+  width: 480px;
+
   text-align: center;
   align-items: center;
   display: flex;
@@ -76,14 +76,10 @@
 }
 
 .col2{
-  width: 20%;
+  width: 40%;
   float: left;
   overflow: hidden;
-  background: rgba(0,0,0,0.1);
-  height: 600px;
-  width: 400px;
-  padding-right: 20px;
-  padding-left: 20px;
+  background: rgba(0,0,0,0.01);
   text-align: center;
   align-items: top;
   display: flex;
@@ -91,7 +87,7 @@
   justify-content: top;
   position: fixed;
   top: 6.1%;
-  left: 47%;
+  left: 45%;
   border: 3px solid #73AD21;
 }
 
@@ -112,33 +108,11 @@
 }
 
 
-.col3{
-    width: 20%;
-  float: left;
-  overflow: hidden;
-  background: rgba(0,0,0,0.1);
-  height: 600px;
-  width: 400px;
-  padding-right: 20px;
-  padding-left: 20px;
-  text-align: center;
-  align-items: top;
-  display: flex;
-  flex-direction: column;
-  justify-content: top;
-  position: fixed;
-  top: 6.1%;
-  left: 70%;
-  border: 3px solid #73AD21;
-
-}
-
-
 
 .modal {
     display: none; /* Hide the modal by default */
     position: fixed; /* Position it on top of the content */
-    z-index: 1; /* Make sure it appears on top */
+    z-index: 10; /* Make sure it appears on top */
     left: 50%;
     top: 6.1%;
     width: 50%; /* Full width */
