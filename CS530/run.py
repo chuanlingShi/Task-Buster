@@ -243,24 +243,23 @@ def dashboard():
         return redirect(url_for('login'))
     
     tasks = get_Mytasks()
+    
     return render_template('home.html', tasks=tasks)
-
 
 @app.route('/get-Mytasks')
 def get_Mytasks():
     user_id = current_user.id
-    todo_list = Card.query.filter_by(user_id=user_id).filter_by(status='In Progress').all()
-    tasks = {}
-    for card in todo_list:
-        task = {
-            'id': card.id,
-            'title': card.title,
-            'description': card.description,
-            'status': card.status
-        }
-        tasks[card.id] = task
-    return jsonify(tasks)
+    todo_list = Card.query.filter_by(user_id=user_id, status='To Do').all()
+    inprogress_list = Card.query.filter_by(user_id=user_id, status='In Progress').all()
+    done_list = Card.query.filter_by(user_id=user_id, status='Done').all()
 
+    tasks = {
+        'todo': [{'id': card.id, 'title': card.title, 'description': card.description} for card in todo_list],
+        'inprogress': [{'id': card.id, 'title': card.title, 'description': card.description} for card in inprogress_list],
+        'done': [{'id': card.id, 'title': card.title, 'description': card.description} for card in done_list]
+    }
+
+    return jsonify(tasks)
 
 
 

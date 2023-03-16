@@ -4,7 +4,9 @@
 
 {% block header %}
     
-    <script src="../static/JS/home.js"></script>
+    <link rel="stylesheet" href="../static/css/home.css">
+    
+    
     <style>
         body {
             background-image: url(https://pic3.zhimg.com/80/v2-2d026ff7a677f3404cbb6560e15e8ad2_720w.webp);
@@ -58,10 +60,24 @@ Home
 
     <section class="products"> 
         <div class="col2">
-            <div style="font-weight: bold; font-size: 70px;">My Tasks</div>                
+            <div style="font-weight: bold; font-size: 70px; background-color: #fff; border: 3px solid #73AD21; margin-top: 20px; margin-right: 20px; margin-left: 20px;">My Tasks</div>                
             
-            <div id="task-list" style="border: 3px solid #73AD21;"></div>
+            <section class="container">
+                <div class="list-column">
+                    <div class="list">
+                        <div id="task-listT"></div>
+                    </div>
 
+                    <div class="list">
+                        <div id="task-listI"></div>
+                    </div>
+
+                    <div class="list">
+                        <div id="task-listD"></div>
+                    </div>
+
+                </div>
+            </section>
         </div>
         
     </section>
