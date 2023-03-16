@@ -62,7 +62,6 @@
   background: rgba(0,0,0,0.01);
   height: 320px;
   width: 480px;
-
   text-align: center;
   align-items: center;
   display: flex;
@@ -70,8 +69,8 @@
   justify-content: center;
   position: fixed;
   bottom: 0;
-  left: 16.5%;
-  border: 3px solid #73AD21;
+  left: 17%;
+
 
 }
 
@@ -113,12 +112,12 @@
     display: none; /* Hide the modal by default */
     position: fixed; /* Position it on top of the content */
     z-index: 10; /* Make sure it appears on top */
-    left: 50%;
+    left: 65%;
     top: 6.1%;
-    width: 50%; /* Full width */
+    width: 35%; /* Full width */
     height: 50%; /* Full height */
     overflow: auto; /* Enable scrolling if needed */
-    background-color: rgba(0,0,0,0.2); /* Add a dark overlay */
+    background-color: rgba(0,0,0,0.6); /* Add a dark overlay */
 }
 
 

@@ -5,6 +5,15 @@
 {% block header %}
     
     <script src="../static/JS/home.js"></script>
+    <style>
+        body {
+            background-image: url(https://pic3.zhimg.com/80/v2-2d026ff7a677f3404cbb6560e15e8ad2_720w.webp);
+            color: black;
+            background-repeat: no-repeat;
+            background-attachment: fixed;  
+            background-size: cover;
+        }
+    </style>
 {% endblock %}
 
 {% block title %}
@@ -18,6 +27,7 @@ Home
 
         {% endif %}
     </div>
+
 
 
     <section class="products">        
@@ -39,8 +49,6 @@ Home
                 setInterval(updateTime, 1000);
             </script>                                               
 
-            <br>
-
             <div class="textP">“When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us.”</div>
 
         </div>
@@ -50,10 +58,10 @@ Home
 
     <section class="products"> 
         <div class="col2">
-            <div style="font-weight: bold; font-size: 70px;">My Tasks</div>
-                                    
-                <div id="task-list"></div>
-                
+            <div style="font-weight: bold; font-size: 70px;">My Tasks</div>                
+            
+            <div id="task-list" style="border: 3px solid #73AD21;"></div>
+
         </div>
         
     </section>
