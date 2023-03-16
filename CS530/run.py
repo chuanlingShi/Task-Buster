@@ -6,6 +6,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from flask_wtf.csrf import CSRFProtect
 from flask import make_response
+import sqlite3
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-goes-here'
@@ -261,14 +262,22 @@ def get_Mytasks():
     return jsonify(tasks)
 
 
-@app.route('/notifications')
-def notifications():
+
+
+
+@app.route('/get-notes')
+def get_notes():
+    # connect to the database
     conn = sqlite3.connect('users.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT content FROM note")
-    notifications = cursor.fetchall()
+    # retrieve data from the database
+    cursor = conn.execute('SELECT * FROM note')
+    notes = cursor.fetchall()
     conn.close()
-    return render_template('base.html', notifications=notifications)
+    # return the data in JSON format
+    return jsonify(notes)
+
+
+
 
 
 
