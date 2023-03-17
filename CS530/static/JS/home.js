@@ -11,7 +11,7 @@ function loadTasks() {
 
             // Add To Do tasks
             const todoList = document.createElement('div');
-            todoList.innerHTML = '<h2>To Do</h2>';
+            todoList.innerHTML = '';
             for (const task of tasks.todo) {
                 const taskElement = document.createElement('div');
                 taskElement.classList.add('user-notes');
@@ -22,7 +22,7 @@ function loadTasks() {
 
             // Add In Progress tasks
             const inprogressList = document.createElement('div');
-            inprogressList.innerHTML = '<h2>In Progress</h2>';
+            inprogressList.innerHTML = '';
             for (const task of tasks.inprogress) {
                 const taskElement = document.createElement('div');
                 taskElement.classList.add('user-notes');
@@ -33,7 +33,7 @@ function loadTasks() {
 
             // Add Done tasks
             const doneList = document.createElement('div');
-            doneList.innerHTML = '<h2>Done</h2>';
+            doneList.innerHTML = '';
             for (const task of tasks.done) {
                 const taskElement = document.createElement('div');
                 taskElement.classList.add('user-notes');

@@ -138,8 +138,24 @@
     margin-left: 13px;
 }
 
+.taskMT{
+    font-weight: bold; 
+    font-size: 30px; 
+    border: 3px solid #73AD21; 
+    text-align: center;
+    align-items: center;
+}
 
-
+.listMT {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+    margin-bottom: 5px;
+    padding: 10px;
+    width: calc(33.33% - 10px);
+    height: auto;
+    border: 3px solid #73AD21;
+}
 
 
 .user-notes {
