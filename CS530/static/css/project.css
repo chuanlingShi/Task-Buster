@@ -19,11 +19,13 @@
           align-items: flex-start;
           min-height: 100%;
         }
+
         .list-column {
           display: flex;
           flex-wrap: nowrap;
           overflow-x: auto;
           margin-right: 10px;
+
         }
 
 
@@ -41,6 +43,7 @@
           padding: 10px;
           border-radius: 4px 4px 0 0;
           color: white;
+          margin: 10px;
         }
         .list-header-wrapper {
             display: flex;
@@ -64,6 +67,7 @@
           font-weight: bold;
           margin: 0;
           display: inline;
+
         }
 
         .list-body {
@@ -85,14 +89,14 @@
           font-weight: bold;
           color: #495057;
           display: inline-block;
-          width: 320px;
-          height: 60px;
+          width: 100px;
+          height: 57px;
           margin-bottom: 0;
           text-align: center;
-          vertical-align: middle;
-          line-height: 60px;
-          position: absolute;
-          right: 0;
+          align-items: center;
+          position: fixed;
+          top: 0;
+          left: 86%;
         }
 
 

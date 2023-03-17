@@ -9,7 +9,7 @@
     
     <style>
         body {
-            background-image: url(https://pic3.zhimg.com/80/v2-2d026ff7a677f3404cbb6560e15e8ad2_720w.webp);
+            background-image: url(https://img.zmtc.com/2019/0815/20190815113424322.jpg);
             color: black;
             background-repeat: no-repeat;
             background-attachment: fixed;  
@@ -30,39 +30,26 @@ Home
         {% endif %}
     </div>
 
-<div class="list-column">
+
     <div class="col1">
-        <h1 style="font-weight: bold; font-size: 70px;">Welcome</h1>
-        <div id="clock" class="textT"></div>
+        <h1 style="font-weight: bold; font-size: 70px; color: white; ">Welcome</h1>
+        <div id="clock" class="textT" onload="updateTime()"></div>
             
-        <script>
-            function updateTime() {
-                var now = new Date();
-                var hours = now.getHours();
-                var minutes = now.getMinutes();
-                var seconds = now.getSeconds();
-                var timeString = hours + ':' + minutes + ':' + seconds;
-                document.getElementById('clock').innerHTML = timeString;
-            }
-
-            // Update the time every second
-            setInterval(updateTime, 1000);
-        </script>                                               
-
         <div class="textP">“When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us.”</div>
 
     </div>
         
-</div> 
+
 
 
 
 
     <div class="col2">
-        <div class="taskT">My Tasks</div>
+        <div class="taskT" style="color:white;">My Tasks</div>
 
         <section class="container">
             <div class="list-column">
+
                 <div class="listMT">
                     <div class="taskMT">To Do</div>
                 </div>
@@ -80,16 +67,17 @@ Home
         
         <section class="container">
             <div class="list-column">
+
                 <div class="list">
-                    <div id="task-listT"></div>
+                    <div id="task-listT" style="color: white;"></div>
                 </div>
 
                 <div class="list">
-                    <div id="task-listI"></div>
+                    <div id="task-listI" style="color: white;"></div>
                 </div>
 
                 <div class="list">
-                    <div id="task-listD"></div>
+                    <div id="task-listD" style="color: white;"></div>
                 </div>
 
             </div>
@@ -100,7 +88,7 @@ Home
 
       
     <div class="col3">         
-        <div class="taskT">My Notes</div>
+        <div class="taskT" style="color:white;">My Notes</div>
             <section class="container">
                 <div class="list-column">
                     <div class="listN">                
@@ -111,9 +99,17 @@ Home
                 </div>
             </section>
         </div>
-    </div>
 
-   
+
+    <div class="listDD">
+        <body onload="drawCalendar()" >      
+               
+            <canvas id="calendar" width="600" height="400" style="color:white;"></canvas>
+
+
+        </body>   
+            
+    </div>
 
 
 {% endblock %}

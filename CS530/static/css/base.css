@@ -31,13 +31,14 @@
     position: fixed; /* Position it on top of the content */
     z-index: 10; /* Make sure it appears on top */
     left: 65%;
-    top: 7.5%;
+    top: 7%;
     width: 35%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scrolling if needed */
     border: 3px solid #73AD21;
     transform-origin: top right;
     transform: scale(0.5);
+    background-color: rgba(0,0,0,0.35);
 }
 
 

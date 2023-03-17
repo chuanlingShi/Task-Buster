@@ -1,8 +1,8 @@
 
 
 .textT{
-  color: black; 
-  font-size: 50px; 
+  color: white; 
+  font-size: 60px; 
   font-weight: 700; 
   line-height: 1; 
   letter-spacing: -0.01em; 
@@ -13,6 +13,7 @@
 }
 
 
+
 .textP{
   font-size: 17px; 
   font-weight: 400; 
@@ -21,6 +22,7 @@
   color: black; 
   margin-top: 20px; 
   text-indent: -0.55em;
+  color: white; 
 }
 
 .container {
@@ -32,11 +34,11 @@
 
 
 .col1{
-  width: 20%;
+  width: 30%;
+  height: 40%;
   float: left;
   overflow: hidden;
   background: rgba(0,0,0,0.01);
-  height: 300px;
   width: 450px;
   text-align: center;
   align-items: center;
@@ -44,17 +46,16 @@
   flex-direction: column;
   justify-content: center;
   position: fixed;
-  bottom: -26%;
+  bottom: 0%;
   left: 17%;
-  border: 3px solid #73AD21;
   transform-origin: top left;
-  transform: scale(0.5);
+  transform: scale(0.9);
 
 
 }
 
 .col2{
-  width: 40%;
+  width: 50%;
   float: left;
   overflow: hidden;
   background: rgba(0,0,0,0.01);
@@ -65,10 +66,11 @@
   justify-content: top;
   position: fixed;
   top: 11%;
-  left: 45%;
+  left: 42%;
   border: 3px solid #73AD21;
   transform-origin: top left;
   transform: scale(0.5);
+
 
 }
 
@@ -91,6 +93,25 @@
 
 }
 
+.col4{
+  width: 40%;
+  float: left;
+  overflow: hidden;
+  background: rgba(0,0,0,0.01);
+  text-align: center;
+  align-items: top;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  position: fixed;
+  bottom: 0%;
+  left: 70%;
+  transform-origin: top left;
+  transform: scale(0.5);
+
+}
+
+
 
 
 .list-column {
@@ -105,32 +126,48 @@
 
 
 .list {
-    background-color: #fff;
+    background-color: rgba(0,0,0,0.35);
     border-radius: 4px;
-    box-shadow: 0 1px 0 rgba(9,30,66,.25);
     margin-bottom: 20px;
-    padding: 10px;
     width: calc(33.33% - 10px);
-    height: auto;
-    border: 3px solid #73AD21;
+    height: fit-content;
 }
 
 .listN {
-    background-color: #fff;
+    background-color: rgba(0,0,0,0.35);
     border-radius: 4px;
     box-shadow: 0 1px 0 rgba(9,30,66,.25);
     margin-bottom: 20px;
     padding: 10px;
     width: 100%;
     height: auto;
-    border: 3px solid #73AD21;
+    color: white;
+    font-size: 35px;
 }
+
+.listDD {    
+    width: 32%;
+    height: 39%;    
+    color: white;
+    position: fixed;
+    bottom: 0%;
+    left: 80%;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform-origin: top left;
+    transform: scale(1);
+
+}
+
 
 
 .taskT{
     font-weight: bold; 
-    font-size: 70px; 
-    background-color: #fff; 
+    font-size: 100px; 
+    background-color: rgba(0,0,0,0.35); 
     border: 3px solid #73AD21; 
     margin-top: 20px; 
     margin-bottom: 20px; 
@@ -141,13 +178,15 @@
 .taskMT{
     font-weight: bold; 
     font-size: 30px; 
-    border: 3px solid #73AD21; 
+
     text-align: center;
     align-items: center;
+    font-size: 40px;
+
 }
 
 .listMT {
-    background-color: #fff;
+    background-color: rgba(0,0,0,0.35);
     border-radius: 4px;
     box-shadow: 0 1px 0 rgba(9,30,66,.25);
     margin-bottom: 5px;
@@ -155,6 +194,8 @@
     width: calc(33.33% - 10px);
     height: auto;
     border: 3px solid #73AD21;
+    color: white;
+    font-size: 45px;
 }
 
 
@@ -163,5 +204,6 @@
     margin-bottom: 20px;
     padding: 10px;
 }
+
 
 
