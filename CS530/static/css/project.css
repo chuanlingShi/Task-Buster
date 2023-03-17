@@ -8,14 +8,13 @@
         main {
         display: flex;
         justify-content: center;
-        padding: 20px;
       }
 
         .container {
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
-          padding: 20px;
+  
 
           min-height: 100%;
         }
@@ -57,20 +56,10 @@
           margin-bottom: 8px;
         }
 
-        .add-card {
-          background-color: #ebecf0;
-          border-radius: 4px;
-          color: #5e6c84;
-          cursor: pointer;
-          font-size: 14px;
-          font-weight: bold;
-          margin-left: 10px;
-          padding: 6px 8px;
-          text-align: center;
-        }
-
-        .add-card:hover {
-          background-color: #c4c9d2;
+        .add-list-button {
+          width: 300px;
+          height: 60px;
+          margin-top: 10px;
         }
 
         .card {

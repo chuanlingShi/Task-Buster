@@ -6,6 +6,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from flask_wtf.csrf import CSRFProtect
 from flask import make_response
+import sqlite3
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-goes-here'
@@ -242,33 +243,47 @@ def dashboard():
         return redirect(url_for('login'))
     
     tasks = get_Mytasks()
+    
     return render_template('home.html', tasks=tasks)
-
 
 @app.route('/get-Mytasks')
 def get_Mytasks():
     user_id = current_user.id
-    todo_list = Card.query.filter_by(user_id=user_id).filter_by(status='In Progress').all()
-    tasks = {}
-    for card in todo_list:
-        task = {
-            'id': card.id,
-            'title': card.title,
-            'description': card.description,
-            'status': card.status
-        }
-        tasks[card.id] = task
+    todo_list = Card.query.filter_by(user_id=user_id, status='To Do').all()
+    inprogress_list = Card.query.filter_by(user_id=user_id, status='In Progress').all()
+    done_list = Card.query.filter_by(user_id=user_id, status='Done').all()
+
+    tasks = {
+        'todo': [{'id': card.id, 'title': card.title, 'description': card.description} for card in todo_list],
+        'inprogress': [{'id': card.id, 'title': card.title, 'description': card.description} for card in inprogress_list],
+        'done': [{'id': card.id, 'title': card.title, 'description': card.description} for card in done_list]
+    }
+
     return jsonify(tasks)
 
 
-@app.route('/notifications')
-def notifications():
-    conn = sqlite3.connect('users.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT content FROM note")
-    notifications = cursor.fetchall()
-    conn.close()
-    return render_template('base.html', notifications=notifications)
+
+
+
+@app.route('/get-notes')
+def get_notes():
+    user_id=current_user.id
+    notes = Note.query.filter_by(user_id=user_id).all()
+    notes_dict = [{'user_id': note.id, 'content': note.content} for note in notes]
+    return jsonify(notes_dict)
+
+
+
+# @app.route('/get-notes')
+# def get_notes():
+#     user_id = current_user.id
+#     notes = Note.query.filter_by(user_id=user_id).all()
+#     notes_dict = {}
+#     for note in notes:
+#         if note.user_id not in notes_dict:
+#             notes_dict[note.user_id] = {'user_id': note.user_id, 'notes': []}
+#         notes_dict[note.user_id]['notes'].append({'id': note.id, 'content': note.content})
+#     return jsonify(list(notes_dict.values()))
 
 
 

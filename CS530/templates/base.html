@@ -10,12 +10,17 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/base.css">
+
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <script src="/static/js/noteViewer.js"></script> 
+    <script src="../static/JS/home.js"></script>
+    
     {% block header %}{% endblock %}
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -33,27 +38,26 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link bell-link" href="#" id="bell-icon">
+                        <a class="nav-link bell-link" href="#" id="bell-icon" data-target="#myModal">
                             <i class="fas fa-bell bell-icon"></i>
                         </a>
                         <div id="myModal" class="modal">
+                            <div><span class="close" style="padding: 10px; color: white;">&times;</span>
+                            </div>
                             <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <h2>Notifications```````</h2>
-                                {% for notification in notifications %}
-                                <p>{{ notification[0] }}</p>
-                                {% endfor %}
-                              </div>
+                                <div id="task-listN"></div>
+                            </div>
+                            
                         </div>
 
 
 
                         <script>
-
                             var bellIcon = document.querySelector(".bell-icon");
                             var modal = document.getElementById("myModal");
 
                             var closeButton = modal.querySelector(".close");
+                            
 
                             bellIcon.addEventListener("click", function() {
                                 modal.style.display = "block";
@@ -62,8 +66,8 @@
                             closeButton.addEventListener("click", function() {
                                 modal.style.display = "none";
                             });
-                        
                         </script>
+
 
                     </li>
                     {% if current_user.is_authenticated %}
