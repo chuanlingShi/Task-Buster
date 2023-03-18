@@ -26,7 +26,7 @@ python run.py
 Then, open your web browser and navigate to http://127.0.0.1:8080/home to access the Task-Buster application.
 
 ## Accessing the application through a public IP address
-If you want to access the application through the provided public IP address, open your web browser and navigate to http://74.235.163.34:8080/home.
+If you want to access the application through the provided public IP address, open your web browser and navigate to http://74.235.163.34:8080.
 
 ## Contributor
 - Chuanling Shi
